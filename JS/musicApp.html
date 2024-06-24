@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music App</title>
+    <link rel="shortcut icon" href="./images/J.png" type="image/x-icon">
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #leftSection {
+            width: 20%;
+            height: 100%;
+            border: 0.3vh solid black;
+            padding: 5px 10px;
+        }
+
+        #addNewBox {
+            width: 500px;
+            background-color: darkseagreen;
+            border: 2px solid black;
+            line-height: 50px;
+            padding: 0px 20px;
+            position: fixed;
+            visibility: hidden;
+        }
+
+        .addNewFormBtns {
+            padding: 5px 10px;
+        }
+
+        #addNewFormBtnsSec {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 7px;
+        }
+
+        #centerSection {
+            width: 55%;
+            height: 100%;
+            border: 0.3vh solid black;
+            border-width: 0.3vh 0px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #centerTop {
+            width: 100%;
+            height: 80%;
+        }
+
+        #centerBottom {
+            width: 100%;
+            height: 20%;
+            border-top: 0.3vh solid black;
+        }
+
+        .songCard {
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 5px 0px;
+            padding: 2px 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #rightSection {
+            width: 25%;
+            height: 100%;
+            border: 0.3vh solid black;
+        }
+
+        #centerBottom {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .songImg {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="addNewBox">
+        <label for="newMusicInput">Add New Music :</label>
+        <input type="file" id="newMusicInput">
+        <hr>
+        <label for="singerNameInput">Singer Name :</label>
+        <input type="text" id="singerNameInput">
+        <hr>
+        <div id="addNewFormBtnsSec">
+            <button class="addNewFormBtns" id="newMusicDiscardBtn">Discard</button>
+            <button class="addNewFormBtns" id="newMusicSaveBtn">Save</button>
+        </div>
+    </div>
+
+    <div id="leftSection">
+        <center>
+            <h3>All Songs</h3>
+        </center>
+
+        <div id="allSongsBox"></div>
+
+        <button id="addNewBtn">Add New</button>
+    </div>
+
+    <div id="centerSection">
+        <div id="centerTop"></div>
+        <div id="centerBottom">
+            <button>Like</button>
+            <button>Shuffle</button>
+            <button>Previous</button>
+            <audio src="" controls autoplay id="mainControl"></audio>
+            <button>Next</button>
+            <button>Mute</button>
+        </div>
+    </div>
+
+    <div id="rightSection"></div>
+
+    <script>
+        let idStart = 1;
+        let getAddNewBox = document.getElementById("addNewBox");
+        let newFileName = document.getElementById("newMusicInput");
+        let fileSingerName = document.getElementById("singerNameInput")
+        let getMusic = JSON.parse(localStorage.getItem("Music")) || [];
+
+        function pushData() {
+            let getMusic1 = JSON.parse(localStorage.getItem("Music")) || [];
+
+            const newMusicDetails = {
+                name: newFileName.files.item(0).name,
+                singer: fileSingerName.value,
+                path: `./music/${newFileName.files.item(0).name}`,
+                songId: `songId${getMusic1.length}`
+            }
+
+            savedMusic = [...getMusic1, newMusicDetails];
+            localStorage.setItem("Music", JSON.stringify(savedMusic));
+
+            document.getElementById("allSongsBox").insertAdjacentHTML("afterbegin", showData(newMusicDetails))
+        }
+
+        function showData(e) {
+            const musicCard =
+                `<div class="songCard" id="songCard${idStart}">
+                    <img src="./images/J.png" alt="img" class="songImg">
+                    <div class="songDetails">
+                        <h3>${e.name}</h3>
+                        <h5>${e.singer}</h5>
+                    </div>
+                    <button id=${e.songId} onclick="playFun()">Play</button>
+                </div>`
+            idStart++
+            return musicCard;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            getMusic.map((e) => document.getElementById("allSongsBox").insertAdjacentHTML("afterbegin", showData(e)))
+        })
+
+        document.getElementById("addNewBtn").addEventListener("click", () => {
+            if (window.getComputedStyle(getAddNewBox).visibility === "visible") {
+                getAddNewBox.style.visibility = "hidden"
+                document.getElementById("addNewBtn").innerHTML = "Add New"
+            } else {
+                getAddNewBox.style.visibility = "visible"
+                document.getElementById("addNewBtn").innerHTML = "Discard"
+                newFileName.value = "";
+                fileSingerName.value = "";
+            }
+        });
+
+        document.getElementById("newMusicDiscardBtn").addEventListener("click", () => {
+            getAddNewBox.style.visibility = "hidden"
+            document.getElementById("addNewBtn").innerHTML = "Add New"
+        });
+
+        document.getElementById("newMusicSaveBtn").addEventListener("click", () => {
+            if (document.getElementById("newMusicInput").files.length == 0) {
+                alert("Please Attatch Music File")
+            } else if (document.getElementById("singerNameInput").value.trim() == "") {
+                alert("Please Enter Singer Name")
+            } else {
+                pushData()
+                newFileName.value = "";
+                fileSingerName.value = "";
+                getAddNewBox.style.visibility = "hidden"
+                document.getElementById("addNewBtn").innerHTML = "Add New"
+            }
+        })
+
+        function playFun() {
+            let playId = event.target.id
+            let selectedSong
+            for (let i = 0; i < getMusic.length; i++) {
+                let tempId = getMusic[i].songId
+                if (playId == tempId) {
+                    selectedSong = getMusic[i]
+                    break;
+                }
+            }
+            document.getElementById("mainControl").src = selectedSong.path
+        }
+
+    </script>
+
+
+</body>
+
+</html>

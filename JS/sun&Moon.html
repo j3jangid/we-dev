@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun Moon Event</title>
+    <style>
+        #box{
+            margin: 200px;
+            width: 200px;
+            height: 200px;
+            /* background-color: rgb(231, 231, 231); */
+            border: 1px solid black;
+            border-radius: 50%;
+            /* box-shadow: 6px 6px 30px 50px rgb(255, 255, 255); */
+        }
+    </style>
+</head>
+<body id="body">
+    <div id="box"></div>
+    <button onclick="Morning()">Sun</button>
+    <button onclick="Evening()">Moon</button>
+    
+
+
+    <script>
+
+let Morning=()=>{
+    document.getElementById("box").style="background-color: rgb(230, 175, 48);border: 1px solid rgb(239, 183, 50);box-shadow: 6px 6px 30px 60px rgb(249, 191, 55)";
+
+    document.getElementById("body").style="";
+}
+
+let Evening=()=>{
+    document.getElementById("box").style="background-color: rgb(231, 231, 231);border: 1px solid white;box-shadow: 6px 6px 30px 50px rgb(255, 255, 255); "
+
+    document.getElementById("body").style.backgroundColor = "black";
+}
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List Test</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        nav {
+            background-color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border: 1px solid green;
+        }
+
+        #leftNav a img {
+            height: 40px;
+            border: 1px solid green;
+            border-radius: 3px;
+        }
+
+        .navSearch {
+            background-color: transparent;
+            color: green;
+            border-color: green;
+            padding: 4px 6px;
+        }
+
+        ::placeholder {
+            color: green;
+            opacity: .5;
+            padding: 4px 6px;
+        }
+
+        .navOpt{
+            background-color: transparent;
+            padding: 2px 4px;
+            border-color: green;
+            color: green;
+        }
+        
+        .tabOpt {
+            height: 50%;
+            width: 20%;
+            background-color: transparent;
+            padding: 2px 4px;
+            border-color: green;
+            color: green;
+        }
+
+        .mainBody {
+            display: flex;
+            justify-content: start;
+        }
+
+        .mainBodyCont {
+            height: calc(100vh - 96px);
+            background-color: black;
+            border: 1px solid green;
+        }
+
+        #list {
+            width: 35vw;
+            overflow: auto;
+        }
+
+        #listEdit {
+            width: 65vw;
+        }
+
+        #listTabCard {
+            height: 93%;
+            padding: 20px 40px;
+            overflow: hidden;
+            display: flex;
+            justify-content: start;
+            flex-direction: column;
+        }
+
+        #titleLable,
+        #discLable {
+            font-size: 30px;
+            color: green;
+        }
+
+        #titleArea {
+            width: 900px;
+            height: 11.5%;
+            font-size: 25px;
+            color: green;
+            background-color: transparent;
+            border: 2px solid green;
+            border-radius: 5px;
+            margin: 10px 0px;
+            margin-bottom: 30px;
+        }
+
+        #dicsArea {
+            width: 900px;
+            font-size: 25px;
+            color: green;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid green;
+            border-radius: 5px;
+            margin: 10px 0px;
+        }
+
+        .listcard {
+            height: 20%;
+            width: 100%;
+            border: 1px solid green;
+            padding: 10px 20px;
+        }
+
+        .listTitle,
+        .listDiscr {
+            color: green;
+            padding: 5px 0px;
+        }
+
+        #editTab {
+            height: 7%;
+            border-top: 2px solid green;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #errorBAr {
+            width: 300px;
+            background-color: green;
+            opacity: .8;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            color: black;
+            font-size: 18px;
+        }
+
+        footer {
+            background-color: black;
+            color: green;
+            padding: 5px;
+            border: 1px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div id="leftNav">
+            <a href="#"><img src="./images/3.jpeg" alt="LOGO"></a>
+        </div>
+        <div id="midNav">
+            <button class="navOpt">All</button>
+            <button class="navOpt">Important</button>
+            <button class="navOpt">Compleated</button>
+            <button class="navOpt">Ignored</button>
+            <button class="navOpt">Mode</button>
+        </div>
+        <div id="rightNav">
+            <input class="navSearch" type="search" name="Search" placeholder="Title/Description" id="">
+            <button class="navSearch">Filter</button>
+        </div>
+    </nav>
+
+    <div class="mainBody">
+        <div class="mainBodyCont" id="list">
+
+        </div>
+        <div class="mainBodyCont" id="listEdit">
+            <div class="listTab" id="listTabCard">
+
+            </div>
+            <div class="listTab" id="editTab">
+                <button class="tabOpt">extra</button>
+                <button class="tabOpt" id="addSave">New Task</button>
+            </div>
+
+        </div>
+    </div>
+    <!-- <div id="errorBAr">Please Enter Title Or Description</div> -->
+    
+    <footer>
+        <center>
+            by J3 Jangid
+        </center>
+    </footer>
+    
+    <script>
+        let localStorageData = JSON.parse(localStorage.getItem("addData"))||[];
+        console.log(localStorageData);
+        
+        let errorBAr = document.createElement("div");
+        errorBAr.id = "errorBAr"
+
+        function addElements() {
+            let titleLable = document.createElement("label");
+            titleLable.id = "titleLable";
+            titleLable.setAttribute("for", "titleArea");
+
+            let titleArea = document.createElement("textarea")
+            titleArea.id = "titleArea";
+            titleArea.setAttribute("rows", 1);
+
+            let discLable = document.createElement("label");
+            discLable.id = "discLable";
+            discLable.setAttribute("for", "dicsArea");
+
+            let dicsArea = document.createElement("textarea")
+            dicsArea.id = "dicsArea";
+            dicsArea.setAttribute("rows", 10);
+
+            document.getElementById("listTabCard").appendChild(titleLable);
+            document.getElementById("titleLable").innerHTML = "Title";
+            document.getElementById("listTabCard").appendChild(titleArea);
+            document.getElementById("listTabCard").appendChild(discLable);
+            document.getElementById("discLable").innerHTML = "Description";
+            document.getElementById("listTabCard").appendChild(dicsArea);
+        }
+
+        function creatcard(e) {
+            const cart = `<div class="listcard">
+                            <h3 class="listTitle">${e.title}<h3>    
+                            <h5 class="listDiscr">${e.dis}<h5>    
+                        </div>`
+                        return cart;
+        }
+
+        localStorageData.forEach((e,i)=>{
+            document.getElementById("list").insertAdjacentHTML("beforeend", creatcard(e))
+        });
+
+        function sendDataToList() {
+            let title = titleArea.value;
+            let dis = dicsArea.value;
+
+            let getData = {
+                title: title,
+                dis : dis
+            }
+
+            let localData = [...localStorageData, getData];
+            localStorage.setItem("addData", JSON.stringify(localData));
+
+            document.getElementById("list").insertAdjacentHTML("beforeend", creatcard(getData));
+
+
+
+
+
+            // let listcard = document.createElement("div");
+            // listcard.className = "listcard";
+            // let listTitle = document.createElement("h3");
+            // listTitle.className = "listTitle";
+            // let listDiscr = document.createElement("h5");
+            // listDiscr.className = "listDiscr";
+
+            // document.getElementById("list").appendChild(listcard);
+            // listcard.appendChild(listTitle);
+            // listcard.appendChild(listDiscr);
+            // listTitle.innerHTML = "Title : " + title;
+            // listDiscr.innerHTML = "Discription : " + dic;
+            // console.log(dicsArea.value);
+        }
+
+        // function showError(params) {
+
+        // }
+
+
+        document.getElementById("addSave").addEventListener("click", () => {
+            if (document.getElementById("addSave").innerHTML == "New Task") {
+                addElements();
+                document.getElementById("addSave").innerHTML = "Save";
+
+            } else if (document.getElementById("addSave").innerHTML == "Save") {
+                if (titleArea.value.trim() === "") {
+                    document.querySelector("body").appendChild(errorBAr)
+                    errorBAr.innerHTML = "Please Enter Title"
+                    setTimeout(() => {
+                        errorBAr.remove();
+                    }, 4000);
+
+                } else if (dicsArea.value.trim() === "") {
+                    document.querySelector("body").appendChild(errorBAr);
+                    errorBAr.innerHTML = "Please Enter Description"
+                    setTimeout(() => {
+                        errorBAr.remove();
+                    }, 4000);
+                } else {
+                    sendDataToList();
+                    document.getElementById("listTabCard").innerHTML = " ";
+                    document.getElementById("addSave").innerHTML = "New Task";
+                }
+            }
+        })
+
+
+
+    </script>
+</body>
+
+</html>

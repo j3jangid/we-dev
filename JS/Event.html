@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<h1 id="heading">Hii</h1>
+<!-- <button onclick="ClickHandle()">Click me</button> -->
+<!-- <button ondblclick="ClickHandle()">Click me</button> -->
+<!-- <button onmouseover="ClickHandle()">Click me</button> -->
+<!-- <button onmouseleave="ClickHandle()">Click me</button> -->
+<!-- <button onmouseleave="ClickHandle()">Click me</button> -->
+<!-- <button onmouseup="ClickHandle()">Click me</button> -->
+<!-- <button onmouseout="ClickHandle()">Click me</button> -->
+<!-- <button onmouseenter="ClickHandle()">Click me</button> -->
+<!-- <button onmousewheel="ClickHandle()">Click me</button> -->
+
+
+<body>
+    <script>
+        const ClickHandle = () => {
+            data = document.getElementById("heading")
+            data.innerHTML = 'Hello &#128512'
+            // data.style.color = "green"
+            // data.style.backgroundColor = "red"
+            // data.style.fontSize = "50px"
+            // data.style = "background-color:red;color:white;font-size:50px"
+            data.setAttribute("style", "background-color:purple;color:white;font-size:50px")
+
+        }
+
+
+        // const ClickHandle = () => {
+        //     // alert("are you sure!")
+        //     data = confirm("are you 18 years above")
+        //     if (data) {
+
+        //         id = prompt("Please Enter Your name")
+        //         if (id) {
+        //             document.getElementById("heading").innerHTML = `<h1>Hiiiiii  ${id}</h1> `
+
+        //         } else {
+        //             document.getElementById("heading").innerHTML = '<h1>Try again</h1>'
+        //         }
+
+        //     } else {
+        //         document.getElementById("heading").innerHTML = '<h1>You are not eligible</h1>'
+        //     }
+        // }
+
+
+
+    </script>
+</body>
+
+</html>

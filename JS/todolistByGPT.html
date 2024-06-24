@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        nav {
+            background-color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border: 1px solid green;
+        }
+
+        #leftNav a img {
+            height: 40px;
+            border: 1px solid green;
+            border-radius: 3px;
+        }
+
+        .navSearch {
+            background-color: transparent;
+            color: green;
+            border-color: green;
+            padding: 4px 6px;
+        }
+
+        ::placeholder {
+            color: green;
+            opacity: .5;
+            padding: 4px 6px;
+        }
+
+        .navOpt,
+        .tabOpt {
+            background-color: transparent;
+            padding: 4px 6px;
+            border-color: green;
+            color: green;
+        }
+
+        .mainBody {
+            display: flex;
+            justify-content: start;
+        }
+
+        .mainBodyCont {
+            height: calc(100vh - 96px);
+            background-color: black;
+            border: 1px solid green;
+        }
+
+        #list {
+            width: 35vw;
+            overflow: auto;
+        }
+
+        #listEdit {
+            width: 65vw;
+        }
+
+        #listTabCard {
+            padding: 20px 40px;
+            overflow: hidden;
+            display: flex;
+            justify-content: start;
+            flex-direction: column;
+        }
+
+        #listTabCardMain {
+            height: 93%;
+        }
+
+        #titleLable,
+        #discLable {
+            font-size: 25px;
+            color: green;
+        }
+
+        #titleArea {
+            width: 900px;
+            height: 11.5%;
+            font-size: 20px;
+            color: green;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid green;
+            border-radius: 5px;
+            margin: 10px 0px;
+            margin-bottom: 30px;
+        }
+
+        #dicsArea {
+            width: 900px;
+            font-size: 20px;
+            color: green;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid green;
+            border-radius: 5px;
+            margin: 10px 0px;
+        }
+
+        .listTitle,
+        .listDiscr {
+            color: green;
+            padding: 5px 0px;
+        }
+
+        #ActionTab {
+            height: 7%;
+            border-top: 2px solid green;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+        }
+
+        #errorBAr {
+            width: 300px;
+            background-color: green;
+            opacity: .8;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            color: black;
+            font-size: 18px;
+        }
+
+
+        footer {
+            background-color: black;
+            color: green;
+            padding: 5px;
+            border: 1px solid green;
+        }
+
+        #editTab {
+            height: 20%;
+            width: 100%;
+            padding: 5px 20px;
+            display: flex;
+            justify-content: start;
+            align-items: start;
+            flex-direction: column;
+            border-bottom: 1px solid green;
+            overflow: auto;
+        }
+
+        .listTitle {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 45ch;
+        }
+
+        .listDiscr {
+            width: 450px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .listAction {
+            height: 30%;
+            width: 100%;
+            background-color: green;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .listIcon {
+            width: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div id="leftNav">
+            <a href="#"><img src="./images/3.jpeg" alt="LOGO"></a>
+        </div>
+        <div id="midNav">
+            <button class="navOpt">All</button>
+            <button class="navOpt">Important</button>
+            <button class="navOpt">Compleated</button>
+            <button class="navOpt">Ignored</button>
+            <button class="navOpt">Mode</button>
+        </div>
+        <div id="rightNav">
+            <input class="navSearch" type="search" name="Search" placeholder="Title/Description" id="">
+            <button class="navSearch">Filter</button>
+        </div>
+    </nav>
+
+    <div class="mainBody">
+        <div class="mainBodyCont" id="list">
+
+        </div>
+        <div class="mainBodyCont" id="listEdit">
+            <div class="listTab" id="listTabCardMain"></div>
+            <div class="listTab" id="ActionTab">
+                <button class="tabOpt">extra</button>
+                <button class="tabOpt" id="addSave">New Task</button>
+            </div>
+
+        </div>
+    </div>
+    <footer>
+        <center>
+            by J3 Jangid
+        </center>
+    </footer>
+
+    <script>
+        // JavaScript code
+        document.addEventListener("DOMContentLoaded", function() {
+            const localStorageData = JSON.parse(localStorage.getItem("addData")) || [];
+            renderTasks(localStorageData);
+
+            const addButton = document.getElementById("addSave");
+            addButton.addEventListener("click", handleAddTask);
+        });
+
+        function renderTasks(tasks) {
+            const taskListContainer = document.getElementById("taskList");
+            taskListContainer.innerHTML = "";
+            tasks.forEach(task => {
+                const taskCard = createTaskCard(task);
+                taskListContainer.insertAdjacentHTML("beforeend", taskCard);
+            });
+        }
+
+        function createTaskCard(task) {
+            // Create HTML for task card
+            return `
+                <div class="listTab">
+                    <div class="listcard">
+                    <h3 class="listTitle">${e.title}</h3>
+                    <h5 class="listDiscr">${e.dis}</h5>
+                </div>
+                <div class="listAction">
+                    <img src="./images/edit.png" alt="Edit" class="listIcon">
+                    <img src="./images/delete.png" alt="Delete" class="listIcon">
+                    <img src="./images/star e.png" alt="Flag" class="listIcon">
+                </div>
+                </div>
+            `;
+        }
+
+        function handleAddTask() {
+            const title = document.getElementById("titleArea").value.trim();
+            const description = document.getElementById("dicsArea").value.trim();
+
+            if (!title || !description) {
+                showError("Please enter both title and description.");
+                return;
+            }
+
+            const task = { title, description };
+            saveTask(task);
+            clearTaskEditor();
+        }
+
+        function saveTask(task) {
+            const localStorageData = JSON.parse(localStorage.getItem("addData")) || [];
+            localStorageData.push(task);
+            localStorage.setItem("addData", JSON.stringify(localStorageData));
+            renderTasks(localStorageData);
+        }
+
+        function clearTaskEditor() {
+            document.getElementById("titleArea").value = "";
+            document.getElementById("dicsArea").value = "";
+        }
+
+        function showError(message) {
+            const errorBar = document.createElement("div");
+            errorBar.id = "errorBar";
+            errorBar.textContent = message;
+            document.body.appendChild(errorBar);
+            setTimeout(() => {
+                errorBar.remove();
+            }, 4000);
+        }
+
+    </script>
+</body>
+
+</html>

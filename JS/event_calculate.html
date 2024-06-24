@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate</title>
+</head>
+
+<body>
+    <input type="number" id="first" >
+    <input type="number" id="second">
+    <hr>
+    <button id="add" onclick="addFun()">+</button>
+    <button id="sub" onclick="subFun()">-</button>
+    <button id="mult" onclick="multFun()">*</button>
+    <button id="divi" onclick="diviFun()">/</button>
+    <button id="reme" onclick="remeFun()">%</button>
+    <span>Result:</span>
+    <span id="resu"></span>
+
+
+    <script>
+        const addFun = () => {
+            value1 = document.getElementById("first").value;
+            value2 = document.getElementById("second").value;
+            let c = parseInt(value1)+parseInt(value2);
+            document.getElementById("resu").innerHTML=c;
+        }
+
+        const subFun = () => {
+            value1 = document.getElementById("first").value;
+            value2 = document.getElementById("second").value;
+            let c = parseInt(value1)-parseInt(value2);
+            document.getElementById("resu").innerHTML=c;
+        }
+
+        const multFun = () => {
+            value1 = document.getElementById("first").value;
+            value2 = document.getElementById("second").value;
+            let c = parseInt(value1)*parseInt(value2);
+            document.getElementById("resu").innerHTML=c;
+        }
+
+        const diviFun = () => {
+            value1 = document.getElementById("first").value;
+            value2 = document.getElementById("second").value;
+            let c = parseInt(value1)/parseInt(value2);
+            document.getElementById("resu").innerHTML=c;
+        }
+
+        const remeFun = () => {
+            value1 = document.getElementById("first").value;
+            value2 = document.getElementById("second").value;
+            let c = parseInt(value1)%parseInt(value2);
+            document.getElementById("resu").innerHTML=c;
+        }
+    </script>
+
+</body>
+
+</html>

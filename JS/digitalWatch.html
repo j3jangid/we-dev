@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todays Time</title>
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+            cursor: default;
+        }
+
+        .mainBox {
+            width: 800px;
+            height: 300px;
+            margin-top: 30px;
+            background-image: none;
+            background-size: cover;
+            background-position: center;
+            border: 50px groove yellowgreen;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .time {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 60px;
+            font-size: 60px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bolder;
+            text-shadow: 0 0 10px yellowgreen;
+        }
+
+        .timeCon {
+            font-size: 70px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bolder;
+        }
+
+        .date {
+            display: flex;
+            gap: 20px;
+            text-shadow: 0 0 5px yellowgreen;
+            visibility: hidden;
+        }
+
+        .dateCon {
+            font-size: 40px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .btnfor {
+            background-color: transparent;
+            color: gray;
+            font-size: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            box-sizing: border-box;
+            padding: 2px 20px;
+            border-color: yellowgreen;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mainBox">
+        <div class="time">
+            <div class="timeCon" id="hours"></div>
+            :
+            <div class="timeCon" id="minu"></div>
+            :
+            <div class="timeCon" id="sec"></div>
+            :
+            <div class="timeCon" id="ampm"></div>
+        </div>
+
+        <div class="date">
+            <div class="dateCon" id="date"></div>
+            <div class="dateCon" id="month"></div>
+            <div class="dateCon" id="year"></div>
+            <div class="dateCon" id="day"></div>
+        </div>
+    </div>
+
+    <div class="btns">
+        <button class="btnfor" id="showDate" onclick="showDateFun()">Show Date</button>
+        <button class="btnfor" id="wallpaper" onclick="changeBackground()">Change Wallpaper</button>
+        <button class="btnfor" id="mode" onclick="changeMode()">Night Mode</button>
+    </div>
+
+
+
+
+    <script>
+        let hours12 = (new Date().getHours() % 12);
+        let amORpm = new Date().getHours() < 12 ? "AM" : "PM";
+
+        setInterval(() => {
+            const monthCode = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const dayCode = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thrusady', 'Friday', 'Saturday'];
+
+            document.querySelector("#month").innerHTML = monthCode[new Date().getMonth()];
+            document.querySelector("#day").innerHTML = dayCode[new Date().getDay()];
+            document.querySelector("#date").innerHTML = new Date().getDate();
+            document.querySelector("#year").innerHTML = new Date().getFullYear();
+        }, 1000);
+
+
+        setInterval(() => {
+            document.querySelector("#hours").innerHTML = hours12;
+            document.querySelector("#minu").innerHTML = new Date().getMinutes();
+            document.querySelector("#sec").innerHTML = new Date().getSeconds();
+            document.querySelector("#ampm").innerHTML = amORpm;
+        }, 1000);
+
+
+        let showDateFun = () => {
+            if (document.querySelector("#showDate").innerHTML == "Show Date") {
+                document.querySelector(".date").style.visibility = "visible";
+                document.querySelector("#showDate").innerHTML = "Hide Date";
+            } else {
+                document.querySelector(".date").style.visibility = "hidden";
+                document.querySelector("#showDate").innerHTML = "Show Date";
+
+            }
+
+        }
+
+        let changeMode = () => {
+            if (document.querySelector("#mode").innerHTML == "Night Mode") {
+
+                document.getElementById("mode").innerHTML = "Day Mode";
+                document.querySelector("body").style = "background-color: White";
+                document.querySelector(".mainBox").style = "border-color:gray";
+
+                let btnArr = document.querySelectorAll(".btnfor");
+                for (let i = 0; i < btnArr.length; i++) {
+                    btnArr[i].style = "border-color: black; color:white; background-color:gray";
+                }
+
+            } else {
+                document.querySelector("#mode").innerHTML = "Night Mode";
+                document.querySelector("body").style = " ";
+                document.querySelector(".mainBox").style = " ";
+
+                let btnArr = document.querySelectorAll(".btnfor");
+                for (let i = 0; i < btnArr.length; i++) {
+                    btnArr[i].style = " ";
+                }
+            }
+
+        }
+
+        let changeBackground = () => {
+            let image = document.querySelector(".mainBox");
+
+            let imgData = ["none", 'url(./images/1.jpeg)', 'url(./images/2.jpeg)', 'url(./images/3.jpeg)', 'url(./images/4.jpeg)', 'url(./images/5.jpeg)', 'url(./images/6.jpeg)', 'url(./images/7.jpeg)', 'url(./images/8.jpeg)', 'url(./images/9.jpeg)']
+
+            let ranNum = Math.floor(Math.random() * imgData.length);
+
+            document.querySelector(".mainBox").style.backgroundImage = imgData[ranNum];
+        }
+
+    </script>
+</body>
+
+</html>

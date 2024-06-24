@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input" onchange="changeHandel()">
+    <!-- <input type="text" id="input" oninput="changeHandel()"> -->
+    <!-- <input type="text" id="input" onblur="changeHandel()"> -->
+    <h1 id="heading">Before Change</h1>
+    
+
+    <script>
+        const changeHandel=()=>{
+            data = document.getElementById("input").value;
+            document.getElementById("heading").innerHTML=data;
+        }
+    </script>
+</body>
+</html>

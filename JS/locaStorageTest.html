@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOcal Storage Test</title>
+</head>
+
+<body>
+    <h1>Local Storage Test</h1>
+
+    <div class="input">
+        <input type="text" class="enterTitle" autofocus>
+        <textarea name="" id="" class="enterDesc"></textarea>
+        <button class="saveData">Save</button>
+    </div>
+
+    <div class="Output">
+
+
+    </div>
+
+    <script>
+        console.log("Local Storage Test");
+
+        let titleShort = document.querySelector(".enterTitle");
+        let descShort = document.querySelector(".enterDesc");
+        
+        
+        function pushData() {
+            let enteredData = {
+                title: titleShort.value,
+                desc: descShort.value,
+            };
+            
+            let getDataFor = JSON.parse(localStorage.getItem("savedData"))||[];
+            let allData = [...getDataFor, enteredData]
+            localStorage.setItem("savedData", JSON.stringify(allData))
+
+        }
+        
+
+        function addCard() {
+            const todoCard =
+                `<div class="cardBox">
+                <h3 class="cardTitle">${e.title}</h3>
+                <h5 class="cardDesc">${e.dis}</h5>
+            </div>`
+        }
+
+        document.querySelector(".saveData").addEventListener("click", () => {
+            if (titleShort.value == "") {
+                console.log("Enter Title");
+            } else if (descShort.value == "") {
+                console.log("Enter Description");
+            } else {
+                pushData();
+                titleShort.value = "";
+                descShort.value = "";
+
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Test 2</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+
+    .output {
+        display: flex;
+        justify-content: start;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .cardBox {
+        width: 300px;
+        border: 2px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .actionIcon {
+        width: 30px;
+        padding: 5px;
+    }
+
+    .actionIcon:hover {
+        border: 2px solid black;
+    }
+
+    .cardAction {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: chartreuse;
+        padding: 5px 10px;
+    }
+
+    .cardDeatils {
+        padding: 5px 10px;
+        background-color: chartreuse;
+        border-bottom: 2px solid black;
+    }
+</style>
+
+
+<body>
+
+    <div class="input">
+        <input type="text" class="enterTitle" autofocus>
+        <textarea name="" id="" class="enterDesc"></textarea>
+        <label for="focus">Focus</label>
+        <input type="checkbox" id="focus">
+        <input type="submit" value="Save" class="saveData">
+    </div>
+
+    <div class="output"></div>
+
+    <script>
+        const userTitle = document.querySelector(".enterTitle")
+        const userDesc = document.querySelector(".enterDesc")
+        const cardFocus = document.querySelector("#focus")
+        let boxId = 1;
+
+        let getData = JSON.parse(localStorage.getItem("todo")) || [];
+
+        function pushData() {
+            const userData = {
+                title: userTitle.value,
+                desc: userDesc.value,
+                focus: cardFocus.checked
+            }
+            document.querySelector(".output").insertAdjacentHTML("afterbegin", showData(userData));
+
+            let getData = JSON.parse(localStorage.getItem("todo")) || [];
+            let allData = [...getData, userData];
+            localStorage.setItem("todo", JSON.stringify(allData));
+        }
+
+        function showData(e, i) {
+            let focusImg = "./images/star_e.png"
+
+            if (e.focus) {
+                focusImg = "./images/star.png"
+            }
+
+            const todoCard =
+                `<div class="cardBox" id="cardBox${boxId}">
+                <div class="cardDeatils">
+                    <div class="savedTitle" id="savedTitle${boxId}">${e.title}</div>
+                    <div class="savedDesc">${e.desc}</div>
+                </div>
+                <div class="cardAction">
+                    <img src="./images/later.png" alt="Ingore" title="Ingore" class="actionIcon actionIconIgnore">
+                    <img src="./images/edit.png" alt="Edit" title="Edit" class="actionIcon actionIconEdit">
+                    <img src="./images/delete.png" alt="Delete" onclick="deletElement()" title="Delete" id="cardDelete${boxId}" class="actionIcon actionIconDelete">
+                    <img src= ${focusImg} alt="Important"title="Important" class="actionIcon actionIconFous">
+                </div>
+            </div>`
+            return todoCard
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            getData.forEach((e, i) => {
+                document.querySelector(".output").insertAdjacentHTML("afterbegin", showData(e, i));
+                boxId++;
+            });
+        })
+
+        document.querySelector(".saveData").addEventListener("click", () => {
+            if (userTitle.value == "") {
+                alert("enter Title");
+            } else if (userDesc.value == "") {
+                alert("enter Description");
+            } else {
+                pushData();
+                userTitle.value = "";
+                userDesc.value = "";
+                cardFocus.checked = false;
+            }
+        })
+
+        const deletElement =()=>{
+            let cardBoxId = document.getElementById(event.target.id).parentNode.parentNode.id;
+            let searchIn = JSON.parse(localStorage.getItem("todo")) || [];
+            let allTitle = [];
+
+            document.getElementById(cardBoxId).style.display = "none"
+
+            for (let i = 0; i < searchIn.length; i++) {
+                allTitle.push(searchIn[i].title);
+            };
+
+            let mainCard = document.getElementById(cardBoxId);
+            let childCard = mainCard.querySelector(".savedTitle");
+            let indexOfDelete = allTitle.indexOf(childCard.innerHTML);
+            searchIn.splice(indexOfDelete, 1);
+            localStorage.setItem("todo", JSON.stringify(searchIn));
+        }
+
+    </script>
+
+</body>
+
+</html>
