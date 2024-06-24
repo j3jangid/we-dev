@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+body {
+  background-color: black;
+}
+
+.animeCard {
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: #D1E7DD;
+  border: 3px solid #198754;
+  box-sizing: border-box;
+  margin: 10px;
+}
+
+.animeCardImage {
+  text-align: center;
+  width: 75px;
+  height: 100px;
+  border: 3px solid green;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.cardImage {
+  height: 100%;
+}
+
+.animeDetails {
+  width: 850px;
+  align-self: baseline;
+}
+
+.animeDetails h3,
+h4,
+h2,
+h1,
+h5 {
+  font-size: 14px;
+  margin: 0px;
+}
+
+.animeDetails h3 {
+  font-size: 30px;
+  margin: 0px;
+}
+
+.animeDetails div {
+  font-size: 15px;
+}
+
+.animeDetailsExt {
+  width: 350px;
+  padding: 0px 15px;
+  border-left: 1px solid gray;
+
+}
+
+.animeGotoSec {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.animeGotoBtn {
+  width: 150px;
+  height: 30px;
+}
+
+.webLink, .watchLink {
+  color: black;
+  text-decoration: none;
+}

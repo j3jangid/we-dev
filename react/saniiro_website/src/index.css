@@ -1,0 +1,252 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.companyLogo:hover {
+  box-shadow: 0px 0px 5px 5px #F15B25;
+  padding: 2px;
+  transition: 500ms;
+}
+
+.loginBtn {
+  background-color: black;
+  color: #F15B25;
+  transition: 500ms;
+}
+
+.loginBtn:hover {
+  font-size: 17px;
+  background-color: #F15B25;
+  box-shadow: 0px 0px 5px 5px black;
+  color: black;
+}
+
+.contactBtn,
+.toggleBtn {
+  width: 50px;
+  font-size: 25px;
+  line-height: 0px;
+  box-sizing: border-box;
+  background-color: #052973;
+  color: #34A853;
+  border-radius: 50%;
+  transition: 500ms;
+}
+
+.contactBtn:hover,
+.toggleBtn:hover {
+  font-size: 27px;
+  background-color: #34A853;
+  box-shadow: 0px 0px 5px 5px #052973;
+  color: #052973;
+  transform: skewY(5deg);
+}
+
+.saniirofy,
+.your,
+.business {
+  color: #052973;
+  line-height: 70px;
+  font-weight: bolder;
+  Text-shadow: -5px -3px 2px #052973;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #34A853;
+}
+
+.saniirofy {
+  color: #34A853;
+  Text-shadow: -5px -3px #34A853;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #052973;
+}
+
+.trustBox {
+  background-image: linear-gradient(160deg, #F15B25, #0457fe);
+  color: white;
+}
+
+.trustBox h1 {
+  font-weight: bolder;
+}
+
+.trustBox label {
+  font-size: 25px;
+  font-weight: bolder;
+  margin-top: 10px;
+}
+
+.awardBox,
+.ratingBox {
+  border: 1px solid lightcyan;
+}
+
+.awardBox img {
+  width: 100px;
+}
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#F15B25, #34A853);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#34A853, #F15B25);
+}
+
+.kpMainBox {
+  background-image: linear-gradient(160deg, #F15B25, #0457fe, #0457fe, #34A853, #34A853);
+
+}
+
+.kpBox {
+  border-radius: 10px;
+  border: 2px solid #052973;
+}
+
+.kpBox h1 {
+  font-size: 22px;
+  text-decoration: underline;
+}
+
+.kpBox img {
+  border-radius: 10px;
+  border: 1px solid #34A853;
+}
+
+.featBox {
+  background-color: #34A853;
+}
+
+.getstarted {
+  background-color: #052973;
+  border-top: 3px solid #F15B25;
+  border-bottom: 3px solid #F15B25;
+  color: #34A853;
+}
+
+.gsbtn,
+.reviewBtn {
+  padding: 10px 20px;
+  font-weight: bolder;
+  background-color: black;
+  color: #34A853;
+  margin: 10px 10px;
+  transition: 500ms;
+}
+
+.gsbtn:hover,
+.reviewBtn:hover {
+  font-size: 17px;
+  background-color: #34A853;
+  box-shadow: 0px 0px 5px 5px black;
+  color: black;
+}
+
+.featuresBox {
+  border: 1px solid #F15B25;
+  background-image: linear-gradient(160deg, white, #34A853);
+}
+
+.startNowBox {
+  background-color: #052973;
+}
+
+.integrationBox {
+  background-color: #34A853;
+}
+
+.formMainBox {
+  background-color: #F15B25;
+}
+
+.integratedClients {
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  margin: 0px 20px;
+}
+
+.formInput {
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 0px 10px;
+}
+
+.formInput input {
+  height: 50px;
+  border: 0px solid;
+}
+
+.formInput input:focus {
+  outline: none;
+}
+
+.formAdd select {
+  height: 50px;
+  padding: 0px 5px;
+  border-radius: 4px;
+  border: 2px solid black;
+}
+
+.formAdd select:focus {
+  outline: none;
+}
+
+.formBox {
+  background-color: white;
+  border: 15px ridge #052973;
+}
+
+.formImg p {
+  font-size: larger;
+}
+
+
+.faqMainBox {
+  background-color: #F15B25;
+
+}
+
+.faqqBox {
+  border: 2px solid #052973;
+}
+
+.footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer h3 {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.getTrialBtn{
+  border: 2px solid #052973;
+  border-radius: 5px;
+  background-color: #34A853;
+  transition: 500ms;
+}
+
+.getTrialBtn:hover{
+  background-color: #F15B25;
+  box-shadow: 0px 0px 5px 5px #052973;
+  letter-spacing: 2px;
+}

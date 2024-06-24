@@ -1,0 +1,31 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.btnSec {
+  background-color: red;
+  width: 1000px;
+  padding: 10px 0px;
+  margin: 10px 0px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.btnType, #changeMode {
+  width: 130px;
+  padding: 5px 0px;
+  background-color: rgb(255, 115, 115);
+}
+
+.infoSec {
+  background-color: red;
+  padding: 10px 0px;
+  margin: 10px 0px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
