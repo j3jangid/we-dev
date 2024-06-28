@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slider Test</title>
 
     <style>
-        *{
+        * {
             margin: 0px;
             padding: 0px;
             box-sizing: border-box;
         }
 
-        .slider{
+        .slider {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,7 +21,7 @@
             margin-top: 100px;
         }
 
-        .track::before, .track::after{
+        /* .track::before, .track::after{
             content: "";
             height: 100%;
             width: 15%;
@@ -37,72 +38,78 @@
             background: linear-gradient(to left, rgb(255, 0, 0)0%, rgba(255, 255, 255, 0)100%);
             right: 0;
             top: 0;
-        }
-        
-        .track{
+            } */
+
+        .track {
+            width: 100%;
             display: flex;
-            gap: 20px;
+            align-items: center;
             margin: 20px 0px;
             overflow: hidden;
         }
-        
-        .slide{
+
+        .slide {
+            width: 400px;
+            height: 120%;
             display: flex;
             justify-content: center;
             align-items: center;
-            perspective: 200px;
-        }
-        
-        .slide img {
-            width: 400px;
+            padding: 20px;
             transition: 500ms;
         }
 
-        .slide img:hover {
-            transform: translateZ(20px);
+        .slide:hover {
+            padding: 0px;
         }
+
+        .slide img {
+            width: 100%;
+        }
+
     </style>
 </head>
+
 <body>
     <div class="slider">
         <div class="track">
             <div class="slide">
                 <img src="./sliderImages/1.jpeg" alt="1">
             </div>
-            
+
             <div class="slide">
                 <img src="./sliderImages/2.jpeg" alt="2">
             </div>
-            
+
             <div class="slide">
                 <img src="./sliderImages/3.jpeg" alt="3">
             </div>
-            
+
             <div class="slide">
                 <img src="./sliderImages/4.jpeg" alt="4">
             </div>
-            
+
             <div class="slide">
                 <img src="./sliderImages/5.jpeg" alt="5">
             </div>
-            
+
             <div class="slide">
                 <img src="./sliderImages/6.jpeg" alt="6">
             </div>
-            
+
             <div class="slide">
                 <img src="./sliderImages/7.jpeg" alt="7">
             </div>
-            
+
             <div class="slide">
                 <img src="./sliderImages/8.jpeg" alt="8">
             </div>
-            
-            <div  class="slide">
+
+            <div class="slide">
                 <img src="./sliderImages/9.jpeg" alt="9">
             </div>
-            
+
         </div>
-    </div>    
+    </div>
 </body>
+
 </html>
