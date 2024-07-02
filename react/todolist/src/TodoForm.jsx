@@ -6,6 +6,7 @@ const TodoForm = () => {
     const [allData, setAllData] = useState([]);
     const [addUpdate, setAddUpdate] = useState("Add");
     const [index, setIndex] = useState();
+    let getstgData = JSON.parse(localStorage.getItem("todo")) || []
 
     function getData(e) {
         setData({ ...data, [e.target.name]: e.target.value })
@@ -14,16 +15,18 @@ const TodoForm = () => {
     function submit(e) {
         e.preventDefault();
         const time = new Date();
-        const currentTime = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+        const currentTime = `${time.getDate()}/${time.getMonth()}/${time.getFullYear()} @ ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
         if (data.title.trim() === "" || data.desc.trim() === "") {
             alert("enter Data")
         } else {
             if (addUpdate === "Add") {
-                setAllData([...allData, { ...data, savingTime: currentTime }]);
+                let localData = [...getstgData, { ...data, savingTime: currentTime, sr: getstgData.length + 1, visiblity: true }]
+                localStorage.setItem("todo", JSON.stringify(localData))
+
             } else {
-                let localData = [...allData];
-                localData[index] = { ...localData[index], updateTime: currentTime };
-                setAllData(localData);
+                let localData = [...getstgData];
+                localData[index] = { ...getstgData[index], ...data, updateTime: currentTime };
+                localStorage.setItem("todo", JSON.stringify(localData))
                 setAddUpdate("Add")
             }
             setData({ title: "", desc: "" })
@@ -36,9 +39,10 @@ const TodoForm = () => {
     }
 
     function deleteHandle(i) {
-        let localData = [...allData];
-        localData.splice(i, 1);
+        let localData = [...getstgData];
+        localData[i] = { ...localData[i], visiblity: false };
         setAllData(localData)
+        localStorage.setItem("todo", JSON.stringify(localData))
     }
 
     function editHandle(obj, i) {
@@ -48,15 +52,24 @@ const TodoForm = () => {
     }
 
     return (
-        <div>
-            <form>
-
-                <input type="text" name="title" id="" value={data.title} onChange={getData} placeholder='Title' autoFocus />
-                <input type="text" name="desc" id="" value={data.desc} onChange={getData} placeholder='Description' />
-                <button type="submit" onClick={submit}>{addUpdate}</button>
-                <button type="reset" onClick={clearFun}>Clear</button>
+        <div style={{ height: "89vh" }}>
+            <form className='container my-3 p-3 bg-dark' style={{ height: "30%" }}>
+                <div className="row my-3">
+                    <div className="col-12">
+                        <input className='form-control' type="text" name="title" id="" value={data.title} onChange={getData} placeholder='Title' autoFocus />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm-12 col-md-10 col-lg-10 col-xl-11 col-xxl-11">
+                        <textarea className='form-control' style={{ height: "100%" }} name="desc" id="" value={data.desc} onChange={getData} placeholder='Description'></textarea>
+                    </div>
+                    <div className="col-sm-12 col-md-2 col-lg-2 col-xl-1 col-xxl-1 mt-md-2 mt-sm-2 d-flex flex-column gap-2">
+                        <button className='btn btn-primary' style={{ width: "100%" }} type="submit" onClick={submit}>{addUpdate}</button>
+                        <button className='btn btn-danger' style={{ width: "100%" }} type="reset" onClick={clearFun}>Clear</button>
+                    </div>
+                </div>
             </form>
-            <Cards allData={allData} deleteHandle={deleteHandle} editHandle={editHandle} />
+            <Cards allData={allData} deleteHandle={deleteHandle} editHandle={editHandle} getData={getstgData} />
         </div>
     )
 }
