@@ -52,8 +52,8 @@ const TodoForm = () => {
     }
 
     return (
-        <div style={{ height: "89vh" }}>
-            <form className='container my-3 p-3 bg-dark' style={{ height: "30%" }}>
+        <div>
+            <form className='container-fluid p-3 bg-dark inputBox'>
                 <div className="row my-3">
                     <div className="col-12">
                         <input className='form-control' type="text" name="title" id="" value={data.title} onChange={getData} placeholder='Title' autoFocus />

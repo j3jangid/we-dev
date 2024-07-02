@@ -2,5 +2,28 @@ body{
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  overflow: hidden;
+  position: relative;
+}
+
+.inputBox{
+  position: fixed;
+  bottom: 0px;
+  z-index: 1;
+  /* box-shadow: 0px -10px 50px 1px #0D6EFD; */
+}
+
+.blankBox{
+  height: 200px;
+}
+
+.navbarBox{
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  box-shadow: 0px 10px 20px 1px black;
+}
+
+.listCard{
+  box-shadow: 0px 0px 20px 1px black;
+
 }
