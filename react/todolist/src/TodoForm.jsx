@@ -53,7 +53,7 @@ const TodoForm = () => {
 
     return (
         <div>
-            <form className='container-fluid p-3 bg-dark inputBox'>
+            <form className='container-fluid p-3 pb-4 bg-dark inputBox'>
                 <div className="row my-3">
                     <div className="col-12">
                         <input className='form-control' type="text" name="title" id="" value={data.title} onChange={getData} placeholder='Title' autoFocus />
@@ -64,7 +64,7 @@ const TodoForm = () => {
                         <textarea className='form-control' style={{ height: "100%" }} name="desc" id="" value={data.desc} onChange={getData} placeholder='Description'></textarea>
                     </div>
                     <div className="col-sm-12 col-md-2 col-lg-2 col-xl-1 col-xxl-1 mt-md-2 mt-sm-2 d-flex flex-column gap-2">
-                        <button className='btn btn-primary' style={{ width: "100%" }} type="submit" onClick={submit}>{addUpdate}</button>
+                        <button className='btn btn-success' style={{ width: "100%" }} type="submit" onClick={submit}>{addUpdate}</button>
                         <button className='btn btn-danger' style={{ width: "100%" }} type="reset" onClick={clearFun}>Clear</button>
                     </div>
                 </div>

@@ -9,7 +9,7 @@ body{
   position: fixed;
   bottom: 0px;
   z-index: 1;
-  /* box-shadow: 0px -10px 50px 1px #0D6EFD; */
+  box-shadow: 0px -2px 10px 1px #198754;
 }
 
 .blankBox{
@@ -24,6 +24,6 @@ body{
 }
 
 .listCard{
-  box-shadow: 0px 0px 20px 1px black;
+  box-shadow: 0px 0px 2px 1px white;
 
 }
