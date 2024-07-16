@@ -3,6 +3,7 @@ body{
   padding: 0px;
   box-sizing: border-box;
   position: relative;
+  background-color: #212529;
 }
 
 .inputBox{
@@ -13,7 +14,8 @@ body{
 }
 
 .blankBox{
-  height: 200px;
+  height: 215px;
+  background-color: #212529;
 }
 
 .navbarBox{

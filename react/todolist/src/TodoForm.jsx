@@ -6,6 +6,7 @@ const TodoForm = () => {
     const [allData, setAllData] = useState([]);
     const [addUpdate, setAddUpdate] = useState("Add");
     const [index, setIndex] = useState();
+    let themeColor = "#198754"
     let getstgData = JSON.parse(localStorage.getItem("todo")) || []
 
     function getData(e) {
@@ -20,7 +21,7 @@ const TodoForm = () => {
             alert("enter Data")
         } else {
             if (addUpdate === "Add") {
-                let localData = [...getstgData, { ...data, savingTime: currentTime, sr: getstgData.length + 1, visiblity: true }]
+                let localData = [...getstgData, { ...data, savingTime: currentTime, sr: getstgData.length + 1, visiblity: true , fav: false, bgColor:themeColor}]
                 localStorage.setItem("todo", JSON.stringify(localData))
 
             } else {
@@ -51,6 +52,25 @@ const TodoForm = () => {
         setAddUpdate("Update")
     }
 
+    function favFun(i){
+        let localData = [...getstgData];
+        if (localData[i].fav === true){
+        localData[i] = { ...localData[i], fav: false };
+        }else{
+            localData[i] = { ...localData[i], fav: true };
+        }
+        setAllData(localData)
+        localStorage.setItem("todo", JSON.stringify(localData))
+    }
+
+    function changebg(e, i) {
+        let localData = [...getstgData];
+        // e.target.value
+        localData[i] = { ...localData[i], bgColor: e.target.value};
+        setAllData(localData)
+        localStorage.setItem("todo", JSON.stringify(localData))
+    }
+
     return (
         <div>
             <form className='container-fluid p-3 pb-4 bg-dark inputBox'>
@@ -69,7 +89,7 @@ const TodoForm = () => {
                     </div>
                 </div>
             </form>
-            <Cards allData={allData} deleteHandle={deleteHandle} editHandle={editHandle} getData={getstgData} />
+            <Cards deleteHandle={deleteHandle} editHandle={editHandle} getData={getstgData} favFun={favFun} changebg={changebg} />
         </div>
     )
 }
