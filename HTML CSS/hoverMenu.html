@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dropdown {
+            display: inline;
+        }
+
+        .drop-btn {
+            background-color: green;
+            width: 100px;
+            padding: 15px;
+            color: aliceblue;
+            border: none;
+        }
+
+        .drop-content {
+            display: none;
+        }
+
+        .drop-content a {
+            display: block;
+            padding: 12px 16px;
+            width: 68px;
+            background-color: aquamarine;
+            color: red;
+        }
+
+        .dropdown:hover .drop-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dropdown">
+        <button class="drop-btn">Dropdown</button>
+        <div class="drop-content">
+            <a href="">Home</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+        </div>
+    </div>
+</body>
+
+</html>

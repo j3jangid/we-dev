@@ -4,23 +4,28 @@ import React from 'react'
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg";
+import menscat from "../data/menscat"
 
 const menuItems = [
   {
     name: 'Mens',
     to: '/mens',
+    conFile: menscat
   },
   {
     name: 'Womens',
     to: '/womens',
+    conFile: []
   },
   {
     name: 'Electronics & Accessories',
     to: '/electronics&accessories',
+    conFile: []
   },
   {
     name: 'Extra',
-    to: '#',
+    to: '/',
+    conFile: []
   },
 ]
 
@@ -45,19 +50,27 @@ export function Navbar() {
         </div>
         <div className="hidden lg:block">
           <ul className="ml-12 inline-flex space-x-8">
-            {menuItems.map((item) => (
-              <li key={item.name}>
-                <Link
-                  to={item.to}
-                  className="inline-flex items-center text-sm font-semibold text-white-800"
-                >
-                  {item.name}
-                  <span>
-                    <ChevronDown className="ml-2 h-4 w-4" />
-                  </span>
-                </Link>
-              </li>
-            ))}
+            {menuItems.map((item, i) => {
+              return (
+                <div class="dropdown w-auto" key={i}>
+                  <Link to={item.to} class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{item.name}<span class="caret"></span></Link>
+                  <dl class="dropdown-menu max-h-80 overflow-auto rounded-0 " >
+                    {
+                      item.conFile.map((cats, ind) => {
+                        return (
+                          <>
+                            <dt className='list-group-item list-group-item-warning' key={ind} >{cats.heading}</dt>
+                            {
+                              cats.category.map((categ)=>(
+                                <dd><Link to={"/"} href="#">{categ}</Link></dd>
+                              ))
+                            }
+                          </>
+                        )
+                      })}
+                  </dl>
+                </div>
+              )})}
           </ul>
         </div>
         <div className="flex grow justify-end">
@@ -68,38 +81,13 @@ export function Navbar() {
           ></input>
         </div>
         <div className="ml-2 mt-2 hidden lg:block">
-          <span className="relative inline-block">
-            <CgProfile className="h-10 w-10 rounded-full" />
-            <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-red-600 ring-2 ring-white"></span>
-          </span>
+          <Link to={"/login"}>
+            <span className="relative inline-block">
+              <CgProfile className="h-10 w-10 rounded-full" />
+              <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-red-600 ring-2 ring-white"></span>
+            </span>
+          </Link>
         </div>
-
-
-        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-        </svg>
-        </button>
-
-        {/* <!-- Dropdown menu --> */}
-        <div id="dropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-          <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-            <li>
-              <Link to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</Link>
-            </li>
-            <li>
-              <Link to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</Link>
-            </li>
-            <li>
-              <Link to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</Link>
-            </li>
-          </ul>
-        </div>
-
-
-
         <div className="ml-2 lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
         </div>
@@ -109,7 +97,7 @@ export function Navbar() {
               <div className="px-5 pb-6 pt-5">
                 <div className="flex items-center justify-between">
                   <div className="inline-flex items-center space-x-2">
-                    <span>
+                    {/* <span>
                       <svg
                         width="30"
                         height="30"
@@ -122,8 +110,8 @@ export function Navbar() {
                           fill="black"
                         />
                       </svg>
-                    </span>
-                    <span className="font-bold">DevUI</span>
+                    </span> */}
+                    <span className="font-bold">deity_itself</span>
                   </div>
                   <div className="-mr-2">
                     <button
@@ -139,9 +127,9 @@ export function Navbar() {
                 <div className="mt-6">
                   <nav className="grid gap-y-4">
                     {menuItems.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.to}
                         className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
                       >
                         <span className="ml-3 text-base font-medium text-gray-900">
@@ -150,15 +138,15 @@ export function Navbar() {
                         <span>
                           <ChevronRight className="ml-3 h-4 w-4" />
                         </span>
-                      </a>
+                      </Link>
                     ))}
                   </nav>
                 </div>
                 <div className="ml-3 mt-4 flex items-center space-x-2">
                   <CgProfile className="h-10 w-10 rounded-full" />
                   <span className="flex flex-col">
-                    <span className="text-sm font-medium text-gray-900">Dan Abromov</span>
-                    <span className="text-sm font-medium text-gray-500">@dan_abromov</span>
+                    <span className="text-sm font-medium text-gray-900">deity_itself</span>
+                    <span className="text-sm font-medium text-gray-500">@deity</span>
                   </span>
                 </div>
               </div>
@@ -166,6 +154,7 @@ export function Navbar() {
           </div>
         )}
       </div>
+      <hr className="navShadow"></hr>
     </div>
   )
 }

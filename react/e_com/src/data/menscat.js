@@ -1,4 +1,4 @@
-menscat = [
+const menscat = [
     {
         heading : "Headgear",
         category : ["Hats", "Caps", "Bonnets", "Helmets", ]
@@ -17,10 +17,12 @@ menscat = [
     },
     {
         heading : "Watches",
-        category : []
+        category : ["Digital", "Analog"]
     },
     {
         heading : "Accessories",
         category : ["Bags", "Belts", "Wallets"]
     }
 ]
+
+export default menscat

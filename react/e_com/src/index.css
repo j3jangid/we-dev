@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navShadow{
+  color: #C3A665;
+  background-color: #C3A665;
+  border-color: 10px solid #C3A665;
+}
+
+*{
+    color: #C3A665;
+}
+
+.loginBtn{
+    background-color: #C3A665;
+}
+
+.loginBtn:hover{
+    border: 1px solid #C3A665;
+}
+
+/* //// */
+/* .navbar {
+    border-radius: 0
+  } */
+
+  @media all and (min-width: 58px) {
+    .dropdown>.dropdown-menu,
+    .dropdown.open>.dropdown-menu {
+       display: block !important;
+       opacity: 0;
+       visibility: hidden;
+       transition: all ease 0.2s;
+    }
+    .dropdown:hover>.dropdown-menu,
+    .dropdown.open:hover>.dropdown-menu { 
+       opacity: 1;
+       visibility: visible; 
+       background-color: black;
+       padding: 10px 15px;
+       border: 1px solid #C3A665;
+    }
+  }
+
+  .dropdown,.dropdown-menu{
+    width: 150px;
+  }
