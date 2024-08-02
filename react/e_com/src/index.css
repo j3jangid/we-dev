@@ -10,6 +10,7 @@
 
 *{
     color: #C3A665;
+    box-sizing: border-box;
 }
 
 .loginBtn{
@@ -21,10 +22,6 @@
 }
 
 /* //// */
-/* .navbar {
-    border-radius: 0
-  } */
-
   @media all and (min-width: 58px) {
     .dropdown>.dropdown-menu,
     .dropdown.open>.dropdown-menu {

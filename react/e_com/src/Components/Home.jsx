@@ -3,19 +3,21 @@ import HotOffer from './HotOffer'
 import BankOffer from './BankOffer'
 import DealOfTheDay from './DealOfTheDay'
 import SeasonalTrends from './SeasonalTrends'
+import TopBrands from './TopBrands'
 
 const Home = () => {
   return (
-    <div>
-      <h1>Hot Deals</h1>
+    <div className=''>
+      <p className="h4 text-center m-2 text-decoration-underline" style={{fontFamily:"Brush Script MT, cursive"}}>Hot Deals</p>
       <HotOffer/>
-      <h1>Bank Offers</h1>
+      <p className="h4 text-center m-2 text-decoration-underline" style={{fontFamily:"Brush Script MT, cursive"}}>Bank Offers</p>
       <BankOffer/>
-      <h1>Deal of the Day</h1>
+      <p className="h4 text-center m-2 text-decoration-underline" style={{fontFamily:"Brush Script MT, cursive"}}>Deal of the Day</p>
       <DealOfTheDay/>
-      <h1>Seasonal Trends</h1>
+      <p className="h4 text-center m-2 text-decoration-underline" style={{fontFamily:"Brush Script MT, cursive"}}>Seasonal Trends</p>
       <SeasonalTrends/>
-      <h1>Top Brands</h1>
+      <p className="h4 text-center m-2 text-decoration-underline" style={{fontFamily:"Brush Script MT, cursive"}}>Top Brands</p>
+      <TopBrands/>
     </div>
   )
 }

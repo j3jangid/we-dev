@@ -52,17 +52,17 @@ export function Navbar() {
           <ul className="ml-12 inline-flex space-x-8">
             {menuItems.map((item, i) => {
               return (
-                <div class="dropdown w-auto" key={i}>
-                  <Link to={item.to} class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{item.name}<span class="caret"></span></Link>
-                  <dl class="dropdown-menu max-h-80 overflow-auto rounded-0 " >
+                <div className="dropdown w-auto" key={i}>
+                  <Link to={item.to} className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{item.name}<span className="caret"></span></Link>
+                  <dl className="dropdown-menu max-h-80 overflow-auto rounded-0 " >
                     {
                       item.conFile.map((cats, ind) => {
                         return (
                           <>
-                            <dt className='list-group-item list-group-item-warning' key={ind} >{cats.heading}</dt>
+                            <dt className='list-group-item list-group-item-warning' key={cats.heading} >{cats.heading}</dt>
                             {
                               cats.category.map((categ)=>(
-                                <dd><Link to={"/"} href="#">{categ}</Link></dd>
+                                <dd key={categ}><Link to={"/"}>{categ}</Link></dd>
                               ))
                             }
                           </>
