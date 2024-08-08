@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import HotOffer from './HotOffer'
 import BankOffer from './BankOffer'
 import DealOfTheDay from './DealOfTheDay'
 import SeasonalTrends from './SeasonalTrends'
 import TopBrands from './TopBrands'
+import StartContext from './Context/StartContext'
+
 
 const Home = () => {
+  const loginData = useContext(StartContext);
+
+  console.log(loginData.userStatus);
+  
+
+  
   return (
     <div className=''>
       <p className="h4 text-center m-2 text-decoration-underline" style={{fontFamily:"Brush Script MT, cursive"}}>Hot Deals</p>

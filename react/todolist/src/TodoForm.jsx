@@ -7,6 +7,8 @@ const TodoForm = () => {
     const [addUpdate, setAddUpdate] = useState("Add");
     const [index, setIndex] = useState();
     let themeColor = "#198754"
+
+    
     let getstgData = JSON.parse(localStorage.getItem("todo")) || []
 
     function getData(e) {

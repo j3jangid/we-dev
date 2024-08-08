@@ -1,0 +1,12 @@
+.active {
+  font-size: 20px;
+  color: blueviolet;
+  text-shadow: 0px 0px 5px blueviolet;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  color: blueviolet;
+  text-shadow: 0px 0px 5px blueviolet;
+  text-decoration: underline;
+}

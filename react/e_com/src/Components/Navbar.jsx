@@ -61,7 +61,7 @@ export function Navbar() {
                           <>
                             <dt className='list-group-item list-group-item-warning' key={cats.heading} >{cats.heading}</dt>
                             {
-                              cats.category.map((categ)=>(
+                              cats.category.map((categ) => (
                                 <dd key={categ}><Link to={"/"}>{categ}</Link></dd>
                               ))
                             }
@@ -70,7 +70,8 @@ export function Navbar() {
                       })}
                   </dl>
                 </div>
-              )})}
+              )
+            })}
           </ul>
         </div>
         <div className="flex grow justify-end">
@@ -80,13 +81,23 @@ export function Navbar() {
             placeholder="Serach"
           ></input>
         </div>
+
         <div className="ml-2 mt-2 hidden lg:block">
-          <Link to={"/login"}>
+          <div className="dropdown w-auto position-relative ">
+            <CgProfile className="h-10 w-10 rounded-full" />
+            <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-red-600 ring-2 ring-white"></span>
+            <ul className="dropdown-menu max-h-80 overflow-auto rounded-0 text-end position-absolute top-10 end-0">
+              <li><Link to={"/login"}>Login</Link></li>
+              <li><Link to={"/signup"}>Sign-Up</Link></li>
+            </ul>
+          </div>
+
+          {/* <Link to={"/login"}>
             <span className="relative inline-block">
               <CgProfile className="h-10 w-10 rounded-full" />
               <span className="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full bg-red-600 ring-2 ring-white"></span>
             </span>
-          </Link>
+          </Link> */}
         </div>
         <div className="ml-2 lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
@@ -143,11 +154,13 @@ export function Navbar() {
                   </nav>
                 </div>
                 <div className="ml-3 mt-4 flex items-center space-x-2">
-                  <CgProfile className="h-10 w-10 rounded-full" />
-                  <span className="flex flex-col">
-                    <span className="text-sm font-medium text-gray-900">deity_itself</span>
-                    <span className="text-sm font-medium text-gray-500">@deity</span>
-                  </span>
+                  <Link to={"/login"}>
+                    <CgProfile className="h-10 w-10 rounded-full" />
+                    <span className="flex flex-col">
+                      <span className="text-sm font-medium text-gray-900">deity_itself</span>
+                      <span className="text-sm font-medium text-gray-500">@deity</span>
+                    </span>
+                  </Link>
                 </div>
               </div>
             </div>
