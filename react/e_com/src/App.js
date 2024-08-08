@@ -8,6 +8,7 @@ import Womens from "./Components/Womens";
 import ElecAcce from "./Components/ElecAcce";
 import LogIn from "./Components/Login";
 import Signup from "./Components/Signup";
+import ItemPage from "./Components/ItemPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/electronics&accessories" element={<ElecAcce />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/itemPage" element={<ItemPage />} />
         </Routes>
         <Footer />
       </CommonContext>

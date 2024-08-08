@@ -8,11 +8,8 @@ import StartContext from './Context/StartContext'
 
 
 const Home = () => {
-  const loginData = useContext(StartContext);
-
-  console.log(loginData.userStatus);
-  
-
+  const userDeatils = useContext(StartContext);
+  console.log(userDeatils.userStatus);
   
   return (
     <div className=''>

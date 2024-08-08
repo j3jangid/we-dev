@@ -5,7 +5,7 @@ import StartContext from './Context/StartContext';
 const Login = () => {
   const allUsers = JSON.parse(localStorage.getItem("userData")) || [];
   const [data, setData] = useState({});
-  const loginData = useContext(StartContext);
+  const userDeatils = useContext(StartContext);
   const goto = useNavigate();
 
   function getData(e) {
@@ -15,7 +15,7 @@ const Login = () => {
   function verifyUser(e) {
     e.preventDefault();
     let uStatus = verifyRes();
-    loginData.setUserStatus(uStatus);
+    userDeatils.setUserStatus(uStatus);
   };
 
   function verifyRes(){
