@@ -1,0 +1,42 @@
+.innerBox {
+    border: 4px solid #C3A665;
+    color: #C3A665;
+}
+
+.innerBox Link {
+    color: #C3A665;
+}
+
+.loginBtn{
+    color: #C3A665;
+    border-color: #C3A665;
+}
+
+.loginBtn:hover{
+    transition: 500ms;
+
+    background-color: #C3A665;
+    border-color: black;
+}
+
+.joinLine{
+    font-size: 13px;
+}
+
+.joinLine:hover{
+    transition: 500ms;
+    font-size: 16px;
+    color: #C3A665;
+}
+
+.restPass{
+    color: #C3A665;
+    text-decoration: underline;
+    text-decoration-color: red;
+}
+
+.errBar{
+    text-decoration: underline;
+    text-decoration-color: #C3A665;
+}
+
