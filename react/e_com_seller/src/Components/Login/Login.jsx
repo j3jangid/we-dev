@@ -1,28 +1,28 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import "./LoginStyle.css"
 import { Link, useNavigate } from 'react-router-dom';
+import StartContext from '../ContextDataFol/StartContext';
 
 const Login = () => {
+    const sellerData = JSON.parse(localStorage.getItem("sellerData"))
     const [show, setShow] = useState(false);
     const [data, setData] = useState({});
-    const negivate = useNavigate();
-    let status = [false];
     const [err, setErr] = useState();
-    const sellerData = JSON.parse(localStorage.getItem("sellerData"))
+    const negivate = useNavigate();
+    const commonData = useContext(StartContext);
+
 
     function getData(e) {
         setData({ ...data, [e.target.name]: e.target.value })
         setErr("")
     }
-    console.log(data);
-    
 
     function loginFun(e) {
         e.preventDefault();
-        checkSeller();
-        if (status[0]) {
+        if (checkSeller()) {
+            commonData.setUserAuth([true, data])
             negivate("/dashboard")
         } else {
             setErr("Invalid User Id / Password")
@@ -31,19 +31,17 @@ const Login = () => {
 
     function checkSeller() {
         for (let i = 0; i < sellerData.length; i++) {
-            if (data.userName === sellerData[i].userName) {
-                console.log("user NAme matched");
-                if (data.userPass === sellerData[i].pass) {
-                    console.log("Pass amtched");
-                    status = [true, data]
-                    return status;
+            if (data.orgID == sellerData[i].orgId) {
+                if (data.userName === sellerData[i].userName) {
+                    console.log("user NAme matched");
+                    if (data.userPass === sellerData[i].pass) {
+                        console.log("Pass amtched");
+                        return true;
+                    }
                 }
             }
         }
     }
-
-
-
 
     return (
         <div className='container-fluid py-5 bg-dark'>
@@ -68,7 +66,7 @@ const Login = () => {
                     </form>
                     <div className='d-flex justify-content-between align-items-center'>
                         <Link to="/register" className='ps-1 joinLine'>Joint Deity's Seller Now</Link>
-                        <img src={require("./deity_itself_logo_crop.jpg")} alt="deity_itself" className='img-fluid' style={{ width: "200px" }} />
+                        <img src={require("../../Images/deity_itself_logo_crop.jpg")} alt="deity_itself" className='img-fluid' style={{ width: "200px" }} />
                     </div>
                 </div>
             </div>
