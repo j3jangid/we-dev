@@ -22,7 +22,6 @@ const Login = () => {
     function loginFun(e) {
         e.preventDefault();
         if (checkSeller()) {
-            commonData.setUserAuth([true, data])
             negivate("/dashboard")
         } else {
             setErr("Invalid User Id / Password")
@@ -36,6 +35,7 @@ const Login = () => {
                     console.log("user NAme matched");
                     if (data.userPass === sellerData[i].pass) {
                         console.log("Pass amtched");
+                        commonData.setUserAuth([true, sellerData[i]])
                         return true;
                     }
                 }

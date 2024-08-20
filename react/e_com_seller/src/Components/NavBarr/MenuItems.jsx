@@ -1,7 +1,7 @@
 const MenuItems = [
     {
         head : "Master",
-        options : ["Category", "item", "Customer"]
+        options : ["Category", "Brands", "Item", "Customer"]
     },
 
     {

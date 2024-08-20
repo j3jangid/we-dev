@@ -16,7 +16,7 @@ const Register = () => {
 
     function registerFun(e) {
         e.preventDefault()
-        let localData = [...sellerData, { ...data, ["active"]: true, ["orgId"]: ranId }]
+        let localData = [...sellerData, { ...data, ["active"]: true, ["orgId"]: ranId, ["userType"]: "sa" }]
         localStorage.setItem("sellerData", JSON.stringify(localData))
         setData({});
         negivate("/login");

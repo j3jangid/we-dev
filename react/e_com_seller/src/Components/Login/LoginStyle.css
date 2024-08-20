@@ -14,7 +14,7 @@
 
 .loginBtn:hover{
     transition: 500ms;
-
+    color: black;
     background-color: #C3A665;
     border-color: black;
 }
