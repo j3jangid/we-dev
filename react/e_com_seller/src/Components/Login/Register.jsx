@@ -8,7 +8,10 @@ const Register = () => {
     const [data, setData] = useState({});
     const [ranId, setRanId] = useState();
     const negivate = useNavigate();
-    const sellerData = JSON.parse(localStorage.getItem("sellerData")) || []
+    const sellerDetails = JSON.parse(localStorage.getItem("sellerDetails")) || []
+    const sellerData = JSON.parse(localStorage.getItem("sellerData")) || {}
+    let timeDate = new Date();
+    let curretTimeDate = `${timeDate.getDate()}/${timeDate.getMonth()}/${timeDate.getFullYear()} & ${timeDate.getHours()}:${timeDate.getMinutes()}:${timeDate.getSeconds()}`
 
     function getData(e) {
         setData({ ...data, [e.target.name]: e.target.value })
@@ -16,8 +19,11 @@ const Register = () => {
 
     function registerFun(e) {
         e.preventDefault()
-        let localData = [...sellerData, { ...data, ["active"]: true, ["orgId"]: ranId, ["userType"]: "sa" }]
-        localStorage.setItem("sellerData", JSON.stringify(localData))
+        let localData = [...sellerDetails, { ...data, ["active"]: true, ["orgId"]: ranId, ["userType"]: "sa", ["regTimeDate"]: curretTimeDate }]
+        localStorage.setItem("sellerDetails", JSON.stringify(localData))
+
+        let localData1 = { ...sellerData, [ranId]: {} }
+        localStorage.setItem("sellerData", JSON.stringify(localData1))
         setData({});
         negivate("/login");
     }

@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import StartContext from '../ContextDataFol/StartContext';
 
 const Login = () => {
-    const sellerData = JSON.parse(localStorage.getItem("sellerData"))
+    const sellerDetails = JSON.parse(localStorage.getItem("sellerDetails"))
     const [show, setShow] = useState(false);
     const [data, setData] = useState({});
     const [err, setErr] = useState();
@@ -29,13 +29,13 @@ const Login = () => {
     }
 
     function checkSeller() {
-        for (let i = 0; i < sellerData.length; i++) {
-            if (data.orgID == sellerData[i].orgId) {
-                if (data.userName === sellerData[i].userName) {
+        for (let i = 0; i < sellerDetails.length; i++) {
+            if (data.orgID == sellerDetails[i].orgId) {
+                if (data.userName === sellerDetails[i].userName) {
                     console.log("user NAme matched");
-                    if (data.userPass === sellerData[i].pass) {
+                    if (data.userPass === sellerDetails[i].pass) {
                         console.log("Pass amtched");
-                        commonData.setUserAuth([true, sellerData[i]])
+                        commonData.setUserAuth([true, sellerDetails[i]])
                         return true;
                     }
                 }

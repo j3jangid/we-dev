@@ -19,6 +19,7 @@ import UserTypeAdd from "./Components/Configuration/UserTypeAdd"
 import PurchaseSetting from "./Components/Settings/PurchaseSetting"
 import SaleSetting from "./Components/Settings/SaleSetting"
 import MasterSetting from "./Components/Settings/MasterSetting"
+import TaxAdd from "./Components/Master/TaxAdd";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
               <Route path="/dashboard" element={<DashBoard />} />
               <Route path="/category" element={<CategoryAdd />} />
               <Route path="/brands" element={<BrandsAdd />} />
+              <Route path="/tax" element={<TaxAdd />} />
               <Route path="/item" element={<ItemsAdd />} />
               <Route path="/customer" element={<CustomerAdd />} />
               <Route path="/sale" element={<Sales />} />
@@ -58,7 +60,6 @@ function App() {
             </Routes>
           </>
       }
-
     </>
   );
 }
