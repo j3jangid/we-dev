@@ -50,7 +50,7 @@ const CategoryAdd = () => {
       }
     } else {
       let localData = { ...sellerData };
-      localData[orgId] = { ...localData[orgId], "category": cate };
+      localData[orgId] = { ...localData[orgId], "category": [cate] };
       localStorage.setItem("sellerData", JSON.stringify(localData));
       setCate("")
     }

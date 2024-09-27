@@ -11,6 +11,8 @@ const BrandsAdd = () => {
     const commonData = useContext(StartContext);
     const orgId = commonData.userAuth[1].orgId
     const showAllData = sellerData[orgId].brands || []
+
+    console.log("all Data");
     console.log(showAllData);
 
 
@@ -50,7 +52,7 @@ const BrandsAdd = () => {
             }
         } else {
             let localData = { ...sellerData };
-            localData[orgId] = { ...localData[orgId], "brands": brand };
+            localData[orgId] = { ...localData[orgId], "brands": [brand] };
             localStorage.setItem("sellerData", JSON.stringify(localData));
             setBrand("")
         }

@@ -135,6 +135,8 @@
                 document.querySelector(".sunrise").innerHTML = new Date(res.sunrise * 1000).toLocaleTimeString()
                 document.querySelector(".sunset").innerHTML = new Date(res.sunset * 1000).toLocaleTimeString()
                 document.querySelector(".wind_degrees").innerHTML = res.wind_degrees
+                console.log("running");
+                
             } catch (error) {
                 console.error(error);
             }
@@ -146,9 +148,7 @@
             getApi(data)
 
         })
-
         getApi("Delhi")
-
     </script>
 </body>
 
