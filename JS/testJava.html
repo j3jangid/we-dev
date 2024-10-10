@@ -5,27 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
-    <form action="">
-        <nav>
-            <h1>Deity Itself</h1>
-        </nav>
-        <div>
-            <a href="/addData.html">Add Data</a>
-            <a href="/updateData.html">update Data</a>
-            <a href="/index.html">delete Data</a>
-            <a href="/index.html">delete by Id</a>
-            <a href="/index.html">Get data set</a>
-            <a href="/index.html">Get data</a>
-            <a href="/index.html">Get data List</a>
-            <a href="/index.html">Add Data</a>
+    <div class="d-flex justify-content-between">
+        <h1>Deity Itself</h1>
+        <select name="navOpt" id="navOpt">
+            <option value="profile">Profile</option>
+            <option value="setting">Setting</option>
+            <option value="logout">Logout</option>
+        </select>
+    </div>
+
+    <div class="d-flex flex-column">
+        <div class="d-flex justify-content-between border border-dark">
+            <h3>Category</h3>
+            <button>Add Category</button>
         </div>
-        <footer>
-            <h2>Footer</h2>
-        </footer>
-    </form>
+        <div class="border border-dark">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">S.N.</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Edit/Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" style="width: 10%;">1</th>
+                        <td style="width: 70%;">Mark</td>
+                        <td style="width: 20%;">
+                            <button>Edit</button>
+                            /
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <h2>Footer</h2>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

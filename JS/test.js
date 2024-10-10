@@ -61,7 +61,7 @@
 //         resolve(34)
 //     }else{
 //         console.log("promish rejected");
-        
+
 //     }
 // })
 
@@ -77,8 +77,54 @@
 //    resonse = await resonse.json()
 
 //    console.log(resonse);
-   
+
 // }
 // getData()
 
 
+// for (let index = 0; index < 15; index++) {
+//     console.log(Math.round(Math.random()*2));
+
+
+// }
+
+// const commonData = useContext(StartContext);
+//     const [items, setItems] = useState([]);
+//     const cat= ["abc", "xyz", "sdk"];
+//     const tax = [0, 5, 12, 18, 28];
+//     const units = ["pcs", "kgs", "pak", "box", "mtr"] 
+//     const att = {
+//         color: ["red", "white", "blue", "black"],
+//         size: ["s", "m", "l", "xl", "xxl"],
+//         brand: ["apple", "nokia", "samsung", "moto"]
+//     }
+//     const [newItem, setNewItem] = useState({});
+
+
+//     function createItem() {
+//         for (let i = 0; i < 50; i++) {
+//             setNewItem({
+//                 name: (i+1)+"item"+(i+1),
+//                 category: cat[Math.round(Math.random()*2)],
+//                 tax: tax[Math.round(Math.random()*4)],
+//                 unit: att.color[Math.round(Math.random()*4)],
+//                 img: <AiOutlineProduct />,
+//                 mrp: (i+1)*10,
+//                 saleRate: (i+1)*9,
+//                 attribute: {
+//                     color: att.color[Math.round(Math.random()*3)],
+//                     size: att.color[Math.round(Math.random()*4)],
+//                     brand: att.color[Math.round(Math.random()*2)],
+//                 },
+//             })
+//             setItems({...items, newItem});
+//         }
+//         console.log(items);
+
+
+//     }
+
+let arr = [1, 2, 3, 4, 5, 6, 7, 8];
+
+let ans = arr.indexOf(10);
+console.log(ans);
