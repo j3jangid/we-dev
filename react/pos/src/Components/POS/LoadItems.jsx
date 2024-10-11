@@ -17,14 +17,13 @@ function LoadItems() {
             localData[checkIndex].qty += 1;
             commonData.setSelectedItems([...localData]);
         } else {
-            commonData.setSelectedItems([{ ...clickedItem, "qty": 1 }, ...selectedArr]);
+            commonData.setSelectedItems([{ ...clickedItem, "qty": 1, }, ...selectedArr]);
         }
 
     }
 
     return (
         <div className='container-fluid border border-dark' >
-            <div>{allItems.length}</div>
             <div className='row overflow-auto' style={{ height: "600px" }}>
                 {
                     allItems.map((e) => {

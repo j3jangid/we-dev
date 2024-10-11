@@ -11,16 +11,27 @@ function SelectedItems() {
         let localData = [...(commonData.selectedItems)];
 
         if (e.target.name === "dec") {
-            if (localData[checkIndex].qty > 1) { 
+            if (localData[checkIndex].qty > 1) {
                 localData[checkIndex].qty -= 1;
             }
         }
-
         if (e.target.name === "inc") {
             localData[checkIndex].qty += 1;
         }
         commonData.setSelectedItems(localData);
     }
+
+    function manualQtyRate(e) {
+        const ID = e.target.id;
+        const name = e.target.name;
+        let value = e.target.value;
+        value = (parseInt(value) < 1 || value === "") ? 0 : parseInt(value);
+        const checkIndex = selectedArr.findIndex(itemObj => itemObj.id == ID);
+        let localData = [...(commonData.selectedItems)];
+        localData[checkIndex][name] = value;
+        commonData.setSelectedItems(localData);
+    }
+    
 
     function deleteItem(e) {
         let ID = e.target.id;
@@ -36,6 +47,10 @@ function SelectedItems() {
                 commonData.selectedItems.map((e) => (
                     <div className='col-12 m-0 p-0' key={e.id}>
                         <div className='border border-dark m-2 p-2'>
+                            <div className='d-flex justify-content-between' style={{ fontSize: "12px" }}>
+                                <p className='m-0 p-0'>itemcode: {e.itemCode}</p>
+                                <p className='m-0 p-0'>barcode: {e.barCode}</p>
+                            </div>
                             <div className='d-flex gap-2'>
                                 {e.image}
                                 <div>
@@ -53,20 +68,22 @@ function SelectedItems() {
                             </div>
                             <div className='d-flex gap-2 m-0 p-0' >
                                 <p className='m-0 p-0'>MRP: {e.mrp}</p>
-                                <p className='m-0 p-0'>Sale Rate: {e.saleRate}</p>
+                                <p className='m-0 p-0'>Sale Rate: <input type="number" name="saleRate" id={e.id} value={e.saleRate} onChange={manualQtyRate} style={{ width: "90px" }} /> </p>
                                 <p className='m-0 p-0'>Tax: {e.tax}%</p>
                             </div>
-                            <div className='d-flex gap-2 m-0 p-0'>
-                                <p className='m-0 p-0'>barcode: {e.barCode}</p>
-                                <p className='m-0 p-0'>itemcode: {e.itemCode}</p>
-                            </div>
-                            <div className='d-flex justify-content-between'>
-                                <div className='d-flex'>
-                                    <button className='m-0 p-0 px-2' id={e.id} name='dec' onClick={changeQty}>-</button>
-                                    <p className='m-0 p-0 px-2'>{e.qty}</p>
-                                    <button className='m-0 p-0 px-2' id={e.id} name='inc' onClick={changeQty}>+</button>
+
+                            <div className='d-flex justify-content-between align-items-center' style={{ height: "30%" }}>
+                                <div className='d-flex gap-2' style={{ width: "60%" }}>
+                                    <button id={e.id} onClick={deleteItem}>delete</button>
+                                    <div className='d-flex'>
+                                        <button className='m-0 p-0 px-2' id={e.id} name='dec' onClick={changeQty}>-</button>
+                                        <input type="number" value={e.qty} id={e.id} name='qty' style={{ width: "45px" }} onChange={manualQtyRate} />
+                                        <button className='m-0 p-0 px-2' id={e.id} name='inc' onClick={changeQty}>+</button>
+                                    </div>
                                 </div>
-                                <button id={e.id} onClick={deleteItem}>delete</button>
+                                <div style={{ width: "40%" }}>
+                                    <p className='m-0 p-0 text-end' style={{ width: "100%" }}>Total : {Math.round((((e.saleRate+e.saleRate*e.tax/100)*e.qty)*100))/100}</p>
+                                </div>
                             </div>
                         </div>
                     </div>

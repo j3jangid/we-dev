@@ -4,6 +4,7 @@ import Test from '../POS/Test'
 function HomeFrame() {
   return (
     <div>
+      home
       <Test/>
     </div>
   )

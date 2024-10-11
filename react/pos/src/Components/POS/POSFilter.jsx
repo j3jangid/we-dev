@@ -5,88 +5,62 @@ import { StartContext } from '../../Context/StartContext'
 
 function POSFilter() {
     const commonData = useContext(StartContext);
-    const inputRef = useRef({});
-    const filterRef = useRef({
-        "nameMatched": [],
-        "categoryMatched": [],
-        "attributeMatched": [],
+    const allItems = commonData.filterData;
+    const inputRef = useRef({
+        "attribute": "",
+        "category": "",
+        "itemName": ""
     });
-
-    function nameFilter(allItems, value) {
-        const filterItems = allItems.filter(itemObj => itemObj.name.toLowerCase().includes(value.toLowerCase()));
-        return value === "" ? [] : filterItems
-    }
-
-    function categoryFilter(allItems, value) {
-        const filterItems = allItems.filter(itemObj => itemObj.itemCategory === value);
-        return value === "" ? [] : filterItems
-    }
-
-    function attributeFilter(allItems, value, attName) {
-        const filterItems = allItems.filter(itemObj => itemObj.attributes[attName] === value);
-        return value === "" ? [] : filterItems
-    }
-
-    function passValue() {
-        let usedFilterArr = [];
-        for (const key in filterRef.current) {
-            usedFilterArr.push(filterRef.current[key])
-        }
-        const pass = usedFilterArr.filter(arr => arr.length > 0)
-        return pass;
-    }
-
-    function finalList(arr) {
-        if (arr.length === 1) {
-            return arr[0]
-        }
-        if (arr.length === 2) {
-            return arr[0].filter(obj1 => arr[1].some(obj2 => obj2.id === obj1.id));
-        }
-        if (arr.length === 3) {
-            return arr[0].filter(obj1 =>
-                arr[1].some(obj2 => obj2.id === obj1.id)
-                &&
-                arr[2].some(obj3 => obj3.id === obj1.id)
-            );
-        }
-        return commonData.systemItems
-    }
 
     function filterList(e) {
         const allItems = commonData.systemItems;
-        const value = e.target.value;
         const name = e.target.name;
-        inputRef.current = { ...inputRef.current, [name]: e.target.value.trim() }
-
-        if (name === "itemName") {
-            const nameMatched = nameFilter(allItems, value);
-            filterRef.current = { ...filterRef.current, "nameMatched": nameMatched };
-        }
-        if (name === "category") {
-            const categoryMatched = categoryFilter(allItems, value);
-            filterRef.current = { ...filterRef.current, "categoryMatched": categoryMatched };
-        }
-        if (name === "attribute") {
-            const attributeMatched = attributeFilter(allItems, value, e.target.selectedOptions[0]?.className);
-            filterRef.current = { ...filterRef.current, "attributeMatched": attributeMatched };
+        if (e.target.name === 'attribute') {
+            inputRef.current = { ...inputRef.current, [name]: e.target.value.trim(), 'attType': e.target.selectedOptions[0]?.className };
+        } else {
+            inputRef.current = { ...inputRef.current, [name]: e.target.value.trim() };
         }
 
-        const finalArr = finalList(passValue());
+        let finalArr = allItems.filter((itemObj) => {
+            const matchesName = inputRef.current.itemName === '' || itemObj.name.toLowerCase().includes(inputRef.current.itemName.toLowerCase());
+            const matchesCategory = inputRef.current.category === '' || itemObj.itemCategory === inputRef.current.category;
+            const matchesAttribute = inputRef.current.attribute === '' || itemObj.attributes[inputRef.current.attType] === inputRef.current.attribute;
+
+            return matchesName && matchesCategory && matchesAttribute;
+        });
         commonData.setFilterData(finalArr);
     }
 
-    function resetfunction() {
-        const localData = commonData.systemItems;
-        commonData.setFilterData(localData);
+    function getKey(e) {
+        if (e.key === "Enter") {
+            scanAdd(e)
+        }
     }
 
     function scanAdd(e) {
-        e.preventDefault();
         const systemItems = commonData.systemItems;
         const selectedArr = commonData.selectedItems;
-        const ID = e.target.id;
-        console.log(ID);
+        const targetID = e.target.id;
+        const targetValue = e.target.value
+
+        const index = systemItems.findIndex((itemobj) => itemobj[targetID] == targetValue);
+
+
+        if (index < 0) {
+            console.log("error");
+        } else {
+            const presetIndex = selectedArr.findIndex((itemObj) => itemObj.id == systemItems[index].id);
+            if (presetIndex < 0) {
+                commonData.setSelectedItems((preItems) => ([...preItems, {...systemItems[index], "qty": 1}]))
+            } else {
+                let localData = [...(commonData.selectedItems)];
+                localData[presetIndex].qty += 1;
+                commonData.setSelectedItems([...localData]);
+            }
+            console.log(index);
+
+        }
+
 
 
         // let clickedItem = systemItems.find(itemObj => itemObj.id === ID);
@@ -103,8 +77,9 @@ function POSFilter() {
 
     return (
         <div className='d-flex gap-2' >
-            <form action="" className='d-flex gap-2' style={{ width: "70%" }}>
-                <select name="category" id="category" style={{ width: "25%" }} onChange={filterList}>
+            <form action="" className='d-flex gap-2 pb-3' style={{ width: "100%" }}>
+                <div>{allItems.length}</div>
+                <select name="category" id="category" onChange={filterList} style={{ width: "20%" }}>
                     <option value="" selected>Category</option>
                     {
                         category.map((e) => (
@@ -112,8 +87,8 @@ function POSFilter() {
                         ))
                     }
                 </select>
-                <input type="search" name="itemName" id="itemName" placeholder='Item Name' style={{ width: "25%" }} onChange={filterList} />
-                <select name="attribute" id="attribute" style={{ width: "25%" }} onChange={filterList}>
+                <input type="search" name="itemName" id="itemName" placeholder='Item Name' onChange={filterList} style={{ width: "20%" }} />
+                <select name="attribute" id="attribute" onChange={filterList} style={{ width: "20%" }}>
                     <option value="" selected>Attribute</option>
                     {
                         Object.entries(Attribute).map(([attrKey, attrValue]) => (
@@ -127,11 +102,8 @@ function POSFilter() {
                         ))
                     }
                 </select>
-                <input type="reset" value="Reset" onClick={resetfunction} style={{ width: "25%" }} />
-            </form>
-            <form action="" className='d-flex gap-2' style={{ width: "30%" }}>
-                <input type="text" name="barCode" id="barCode" placeholder='Barcode' style={{ width: "50%" }} onClick={scanAdd}/>
-                <input type="text" name="itemCode" id="itemCode" placeholder='Itemcode'style={{ width: "50%" }} onClick={scanAdd}/>
+                <input type="text" name="barCode" id="barCode" placeholder='Barcode' onKeyDown={getKey} style={{ width: "20%" }} />
+                <input type="text" name="itemCode" id="itemCode" placeholder='Itemcode' onKeyDown={getKey} style={{ width: "20%" }} />
             </form>
         </div>
     )

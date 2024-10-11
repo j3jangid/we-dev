@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { AiOutlineProduct } from "react-icons/ai";
 import attribute from "./Attributes";
 import category from "./Category";

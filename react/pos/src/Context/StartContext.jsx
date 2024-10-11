@@ -6,8 +6,10 @@ const CommonContextProvider = (props) => {
     const [systemItems, setSystemItems] = useState([]);
     const [filterData, setFilterData] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
+    const [customer, setCustomer] = useState([]);
+    const [saleDetails, setSaleDetails] = useState([]);
   return (
-    <StartContext.Provider value={{systemItems, setSystemItems, filterData, setFilterData, selectedItems, setSelectedItems}}>
+    <StartContext.Provider value={{systemItems, setSystemItems, filterData, setFilterData, selectedItems, setSelectedItems, customer, setCustomer, saleDetails, setSaleDetails}}>
         {props.children}
     </StartContext.Provider>
   )
