@@ -25,9 +25,9 @@ function POSFrame() {
                     <POSFilter />
                     <LoadItems />
                 </div>
-                <div className="col-4">
+                <div className="col-4 bg-dark p-2">
                     <div>
-                        <form action="" className='d-flex gap-2'>
+                        <form action="" className='d-flex gap-2 mb-2'>
                             <input type="text" placeholder='Name' style={{width:"65%"}} id='name' onChange={getCustomerDetail}/>
                             <input type="number" placeholder='Mobile No.' style={{width:"35%"}} id='number' onChange={getCustomerDetail}/>
                         </form>

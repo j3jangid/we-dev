@@ -45,8 +45,8 @@ function SelectedItems() {
         <div className='overflow-auto' style={{ height: "400px" }}>
             {
                 commonData.selectedItems.map((e) => (
-                    <div className='col-12 m-0 p-0' key={e.id}>
-                        <div className='border border-dark m-2 p-2'>
+                    <div className='col-12 m-0 p-0 ' key={e.id}>
+                        <div className='mt-2 me-2 p-2 bg-light'>
                             <div className='d-flex justify-content-between' style={{ fontSize: "12px" }}>
                                 <p className='m-0 p-0'>itemcode: {e.itemCode}</p>
                                 <p className='m-0 p-0'>barcode: {e.barCode}</p>

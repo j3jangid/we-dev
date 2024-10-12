@@ -2,6 +2,17 @@ body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 
+/* to hide button and nav bar when we take print */
+@media print {
+  button {
+    display: none;
+  }
+
+  .navbar{
+    display: none;
+  }
+}

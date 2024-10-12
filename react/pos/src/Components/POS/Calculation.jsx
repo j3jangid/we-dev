@@ -7,6 +7,8 @@ function Calculation({ customer }) {
     const selectedArr = commonData.selectedItems;
     const salesData = commonData.saleDetails;
     const navigate = useNavigate();
+    const date = new Date();
+    const currentDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
 
     const [disdetails, setDisdetails] = useState({
         disAmt: 0,
@@ -42,44 +44,40 @@ function Calculation({ customer }) {
     }
 
     function saveBill() {
-        if (selectedArr.length>0) {
+        if (selectedArr.length > 0) {
             let billitems = [];
-        for (let i = 0; i < selectedArr.length; i++) {
-            let itemDetail = {
-                id: selectedArr[i].id,
-                qty: selectedArr[i].qty,
-                saleRate: selectedArr[i].saleRate,
-                tax: selectedArr[i].tax,
+            for (let i = 0; i < selectedArr.length; i++) {
+                let itemDetail = {
+                    id: selectedArr[i].id,
+                    qty: selectedArr[i].qty,
+                    saleRate: selectedArr[i].saleRate,
+                    tax: selectedArr[i].tax,
+                }
+                billitems.unshift(itemDetail);
             }
-            billitems.unshift(itemDetail);
-        }
 
-        commonData.setSaleDetails((preVal) => ([
-            ...preVal,
-            {
-                billDetail: {
-                    billNo: "pos-"+(salesData.length+1),
-                    cName: customer.name,
-                    cNumber: customer.number,
-                    billDiscountType : disdetails.disType, 
-                    billDiscountValue : disdetails.disValue, 
-                },
-                itemsDetail: billitems
-            }
-        ]));
-        resetSelected();
-        navigate("/sales");
-
-            
+            commonData.setSaleDetails((preVal) => ([
+                ...preVal,
+                {
+                    billDetail: {
+                        billNo: "pos-" + (salesData.length + 1),
+                        cName: customer.name === "" ? "cash" : customer.name,
+                        cNumber: customer.number,
+                        billDiscountType: disdetails.disType,
+                        billDiscountValue: disdetails.disValue,
+                        billDate: currentDate
+                    },
+                    itemsDetail: billitems
+                }
+            ]));
+            resetSelected();
+            navigate("/sales");
         }
     }
-    console.log("bill", commonData.saleDetails);
-    
 
     function resetSelected() {
         commonData.setSelectedItems([]);
         setDisdetails((preVal) => ({ ...preVal, disValue: "", }))
-
     }
 
     useEffect(() => {
@@ -109,22 +107,24 @@ function Calculation({ customer }) {
     }, [disdetails.disValue, disdetails.disType]);
 
     return (
-        <div className='p-0 m-0'>
-            <div className='d-flex justify-content-between'>
-                <p>Total Qty: {values.totalQty}</p>
-                <p>Item Total: {values.totalTaxAble + values.totalTaxAmt}</p>
+        <div className='p-0 m-0 bg-light'>
+            <div className='d-flex justify-content-between bg-dark text-light py-1 px-3'>
+                <p className='p-0 m-0'>Total Qty: {values.totalQty}</p>
+                <p className='p-0 m-0'>Item Total: {values.totalTaxAble + values.totalTaxAmt}</p>
             </div>
 
-            <div className='border border-dark p-2 m-0'>
-                <p>Total Taxable: {values.totalTaxAble}</p>
-                <p>Total Tax: {values.totalTaxAmt}</p>
-                <input type="number" value={disdetails.disValue} onChange={disValue} />
-                <select onChange={disType} value={disdetails.disType}>
-                    <option value="p">%</option>
-                    <option value="r">Rs</option>
-                </select>
-                <p>Discount Amt: {disdetails.disAmt}</p>
-                <p>Grand Total: {Math.round(((values.totalTaxAble + values.totalTaxAmt) - disdetails.disAmt) * 100) / 100}</p>
+            <div className='border border-dark p-2 m-0' >
+                <p className='p-0 m-0'>Total Taxable: {values.totalTaxAble}</p>
+                <p className='p-0 m-0'>Total Tax: {values.totalTaxAmt}</p>
+                <div className='d-flex'>
+                    <input type="number" value={disdetails.disValue} onChange={disValue} />
+                    <select onChange={disType} value={disdetails.disType}>
+                        <option value="p">%</option>
+                        <option value="r">Rs</option>
+                    </select>
+                    <p className='p-0 m-0'>Discount Amt: {disdetails.disAmt}</p>
+                </div>
+                <p className='p-0 m-0'>Grand Total: {Math.round(((values.totalTaxAble + values.totalTaxAmt) - disdetails.disAmt) * 100) / 100}</p>
                 <div className='d-flex justify-content-between'>
                     <button onClick={resetSelected}>Reset</button>
                     <button onClick={saveBill}>Save</button>

@@ -26,9 +26,9 @@ function LoadItems() {
         <div className='container-fluid border border-dark' >
             <div className='row overflow-auto' style={{ height: "600px" }}>
                 {
-                    allItems.map((e) => {
+                    allItems.map((e, i) => {
                         return (
-                            <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 m-0 p-0' >
+                            <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 m-0 p-0' key={i} >
                                 <div className='border border-dark m-2 p-2' key={e.id} onClick={() => addItems(e.id)}>
                                     <p className='m-0 p-0'>{e.name}({e.units})</p>
                                     <div className='d-flex'>

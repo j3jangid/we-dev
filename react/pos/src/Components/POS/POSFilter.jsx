@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import category from '../../Data/Category'
 import Attribute from "../../Data/Attributes"
 import { StartContext } from '../../Context/StartContext'
@@ -6,11 +6,13 @@ import { StartContext } from '../../Context/StartContext'
 function POSFilter() {
     const commonData = useContext(StartContext);
     const allItems = commonData.filterData;
+    const [code, setCode] = useState("");
     const inputRef = useRef({
         "attribute": "",
         "category": "",
         "itemName": ""
     });
+
 
     function filterList(e) {
         const allItems = commonData.systemItems;
@@ -33,7 +35,11 @@ function POSFilter() {
 
     function getKey(e) {
         if (e.key === "Enter") {
-            scanAdd(e)
+            scanAdd(e);
+            setCode({
+                barCode:"",
+                itemCode:""
+            })
         }
     }
 
@@ -41,38 +47,23 @@ function POSFilter() {
         const systemItems = commonData.systemItems;
         const selectedArr = commonData.selectedItems;
         const targetID = e.target.id;
-        const targetValue = e.target.value
-
+        const targetValue = e.target.value;
         const index = systemItems.findIndex((itemobj) => itemobj[targetID] == targetValue);
-
-
         if (index < 0) {
             console.log("error");
         } else {
             const presetIndex = selectedArr.findIndex((itemObj) => itemObj.id == systemItems[index].id);
             if (presetIndex < 0) {
-                commonData.setSelectedItems((preItems) => ([...preItems, {...systemItems[index], "qty": 1}]))
+                commonData.setSelectedItems((preItems) => ([...preItems, { ...systemItems[index], "qty": 1 }]))
             } else {
                 let localData = [...(commonData.selectedItems)];
                 localData[presetIndex].qty += 1;
                 commonData.setSelectedItems([...localData]);
             }
-            console.log(index);
-
         }
-
-
-
-        // let clickedItem = systemItems.find(itemObj => itemObj.id === ID);
-        // let clickItem = selectedArr.find(e => e.id === ID);
-
-        // if (clickItem) {
-        //     let localData = [...(commonData.selectedItems)];
-        //     localData[checkIndex].qty += 1;
-        //     commonData.setSelectedItems([...localData]);
-        // } else {
-        //     commonData.setSelectedItems([{ ...clickedItem, "qty": 1 }, ...selectedArr]);
-        // } 
+    }
+    function getCode(e) {
+        setCode({...code, [e.target.id]:e.target.value})
     }
 
     return (
@@ -102,8 +93,8 @@ function POSFilter() {
                         ))
                     }
                 </select>
-                <input type="text" name="barCode" id="barCode" placeholder='Barcode' onKeyDown={getKey} style={{ width: "20%" }} />
-                <input type="text" name="itemCode" id="itemCode" placeholder='Itemcode' onKeyDown={getKey} style={{ width: "20%" }} />
+                <input type="text" name="barCode" id="barCode" placeholder='Barcode' onKeyDown={getKey} onChange={getCode} value={code.barCode} style={{ width: "20%" }} />
+                <input type="text" name="itemCode" id="itemCode" placeholder='Itemcode' onKeyDown={getKey} onChange={getCode} value={code.itemCode} style={{ width: "20%" }} />
             </form>
         </div>
     )

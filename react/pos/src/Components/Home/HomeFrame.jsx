@@ -1,11 +1,10 @@
 import React from 'react'
-import Test from '../POS/Test'
 
 function HomeFrame() {
   return (
     <div>
-      home
-      <Test/>
+      <h1>Home Page</h1>
+      <h2>Details About My POS</h2>
     </div>
   )
 }
