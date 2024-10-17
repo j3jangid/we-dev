@@ -24,7 +24,6 @@ import TaxAdd from "./Components/Master/TaxAdd";
 
 function App() {
   const commonData = useContext(StartContext);
-  // console.log(commonData1.userAuth[0]);
 
   return (
     <>
@@ -49,14 +48,15 @@ function App() {
               <Route path="/master_settings" element={<MasterSetting />} />
               <Route path="/sale_settings" element={<SaleSetting />} />
               <Route path="/purchase_setting" element={<PurchaseSetting />} />
+              <Route path="*" element={<DashBoard />} />
             </Routes>
           </>
           :
           <>
-            <Login />
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="*" element={<Login />} />
             </Routes>
           </>
       }

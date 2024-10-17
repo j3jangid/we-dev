@@ -6,7 +6,7 @@ const MenuItems = [
 
     {
         head : "Transaction",
-        options : ["Sale", "Purchase"]
+        options : ["Sale", "Purchase", "Payment & Receipt"]
     },
 
     {

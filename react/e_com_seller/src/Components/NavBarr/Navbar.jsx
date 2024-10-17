@@ -8,8 +8,7 @@ const Navbar = () => {
     console.log(commonData.userAuth[1]);
 
     function getLink(opts) {
-        let newArr = opts.split(" ");
-        let newOpts = newArr.join("_")
+        let newOpts = opts.replace(/ /g, "_");
         newOpts = newOpts.toLowerCase();
         return newOpts
     }
